@@ -28,9 +28,6 @@ neoForge {
     }
 }
 
-dependencies {
-}
-
 idea {
     module {
         inheritOutputDirs = true
