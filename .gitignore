@@ -1,6 +1,31 @@
-/run/
-/run_data/
-/run_server/
-/build/
-/.idea/
-/.gradle/
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Run directories
+run/
+run_server/
+run_data/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+
+# Java
+*.class
+*.log
+*.jar
+*.war
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.env
+*.pem
