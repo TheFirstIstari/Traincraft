@@ -19,6 +19,7 @@ public class Traincraft {
 
     public Traincraft() {
         LOGGER.info("Traincraft " + MOD_VERSION + " loaded!");
-        LOGGER.info("Traincraft is being rewritten for NeoForge 1.21+");
+        LOGGER.info("Rewrite in progress for NeoForge 1.21+");
+        LOGGER.info("Testing with runClient - registration works at runtime");
     }
 }
