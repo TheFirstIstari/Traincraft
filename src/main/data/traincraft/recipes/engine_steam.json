@@ -1,0 +1,20 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 1,
+  "result": {
+    "id": "traincraft:engine_steam",
+    "count": 1
+  },
+  "ingredients": [
+    { "ingredient": { "item": "traincraft:steel_ingot" }, "count": 4 },
+    { "ingredient": { "item": "traincraft:boiler_iron" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:piston" }, "count": 2 },
+    { "ingredient": { "item": "minecraft:iron_ingot" }, "count": 4 },
+    { "ingredient": { "item": "minecraft:redstone" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:cylinder" }, "count": 1 },
+    { "ingredient": { "item": "minecraft:air" }, "count": 0 },
+    { "ingredient": { "item": "minecraft:air" }, "count": 0 },
+    { "ingredient": { "item": "minecraft:air" }, "count": 0 },
+    { "ingredient": { "item": "minecraft:air" }, "count": 0 }
+  ]
+}

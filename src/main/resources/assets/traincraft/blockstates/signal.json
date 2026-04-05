@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,powered=false": { "model": "traincraft:block/signal" },
+    "facing=east,powered=false": { "model": "traincraft:block/signal", "y": 90 },
+    "facing=south,powered=false": { "model": "traincraft:block/signal", "y": 180 },
+    "facing=west,powered=false": { "model": "traincraft:block/signal", "y": 270 },
+    "facing=north,powered=true": { "model": "traincraft:block/signal_on" },
+    "facing=east,powered=true": { "model": "traincraft:block/signal_on", "y": 90 },
+    "facing=south,powered=true": { "model": "traincraft:block/signal_on", "y": 180 },
+    "facing=west,powered=true": { "model": "traincraft:block/signal_on", "y": 270 }
+  }
+}

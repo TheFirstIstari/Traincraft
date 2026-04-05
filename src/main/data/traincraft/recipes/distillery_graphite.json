@@ -1,0 +1,16 @@
+{
+  "type": "traincraft:distillery",
+  "input": {
+    "item": "traincraft:coal_dust"
+  },
+  "input_amount": 1,
+  "output": {
+    "id": "traincraft:graphite",
+    "count": 1
+  },
+  "fluid_output": {
+    "id": "traincraft:refined_fuel",
+    "count": 1000
+  },
+  "burn_time": 400
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "traincraft:block/signal",
+    "all": "traincraft:block/signal"
+  },
+  "elements": [
+    {
+      "from": [6, 0, 6],
+      "to": [10, 16, 10],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 16], "texture": "#all"},
+        "south": {"uv": [0, 0, 4, 16], "texture": "#all"},
+        "east": {"uv": [0, 0, 4, 16], "texture": "#all"},
+        "west": {"uv": [0, 0, 4, 16], "texture": "#all"},
+        "up": {"uv": [0, 0, 4, 4], "texture": "#all"},
+        "down": {"uv": [0, 0, 4, 4], "texture": "#all"}
+      }
+    },
+    {
+      "from": [4, 12, 4],
+      "to": [12, 16, 12],
+      "faces": {
+        "north": {"uv": [0, 0, 8, 4], "texture": "#all"},
+        "south": {"uv": [0, 0, 8, 4], "texture": "#all"},
+        "east": {"uv": [0, 0, 8, 4], "texture": "#all"},
+        "west": {"uv": [0, 0, 8, 4], "texture": "#all"},
+        "up": {"uv": [0, 0, 8, 8], "texture": "#all"},
+        "down": {"uv": [0, 0, 8, 8], "texture": "#all"}
+      }
+    }
+  ]
+}
