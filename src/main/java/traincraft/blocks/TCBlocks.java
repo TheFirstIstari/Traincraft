@@ -14,6 +14,8 @@ import traincraft.Traincraft;
 import traincraft.blocks.assemblytable.BlockAssemblyTable;
 import traincraft.blocks.distillery.BlockDistillery;
 import traincraft.blocks.openhearthfurnace.BlockOpenHearthFurnace;
+import traincraft.blocks.signal.BlockSignal;
+import traincraft.blocks.switchstand.BlockSwitchStand;
 import traincraft.blocks.trainworkbench.BlockTrainWorkbench;
 
 public class TCBlocks {
@@ -70,4 +72,10 @@ public class TCBlocks {
 
     public static final DeferredHolder<Block, Block> BATTERY = BLOCKS.register("battery",
         () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f)));
+
+    public static final DeferredHolder<Block, BlockSignal> SIGNAL = BLOCKS.register("signal",
+        () -> new BlockSignal(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(2.0f, 6.0f).noOcclusion()));
+
+    public static final DeferredHolder<Block, BlockSwitchStand> SWITCH_STAND = BLOCKS.register("switch_stand",
+        () -> new BlockSwitchStand(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(2.0f, 6.0f).noOcclusion()));
 }

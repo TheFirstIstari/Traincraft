@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "III",
-    "I I",
-    "III"
+    "CCC",
+    "C C",
+    "CCC"
   ],
   "key": {
-    "I": {
+    "C": {
       "item": "traincraft:copper_ingot"
     }
   },

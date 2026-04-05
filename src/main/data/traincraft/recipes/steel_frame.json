@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "III",
-    "I I",
-    "III"
+    "SSS",
+    "S S",
+    "SSS"
   ],
   "key": {
-    "I": {
+    "S": {
       "item": "traincraft:steel_ingot"
     }
   },

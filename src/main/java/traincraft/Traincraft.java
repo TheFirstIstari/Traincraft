@@ -34,7 +34,7 @@ public class Traincraft {
 
     public static final String MOD_ID = "traincraft";
     public static final String MOD_NAME = "Traincraft";
-    public static final String MOD_VERSION = "5.0.0-alpha1";
+    public static final String MOD_VERSION = "5.0.0-alpha2";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
     public Traincraft(IEventBus modEventBus) {

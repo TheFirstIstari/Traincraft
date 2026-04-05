@@ -72,6 +72,60 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         }
 
         this.travelDistance += this.getDeltaMovement().length();
+
+        LivingEntity controller = getControllingPassenger();
+        if (controller != null) {
+            applyCustomPhysics(controller);
+        }
+    }
+
+    private void applyCustomPhysics(LivingEntity controller) {
+        double maxSpeed = getMaxSpeed() / 20.0;
+        double maxReverse = getMaxReverseSpeed() / 20.0;
+        double accel = getAcceleration() / 20.0;
+        double brake = getBreakPower() / 20.0;
+
+        Vec3 motion = getDeltaMovement();
+        double currentSpeed = motion.horizontalDistance();
+
+        boolean forward = controller.input.forward();
+        boolean backward = controller.input.left() || controller.input.right();
+        boolean braking = controller.input.down();
+
+        if (forward) {
+            if (currentSpeed < maxSpeed) {
+                Vec3 newMotion = motion.add(motion.normalize().multiply(accel, 0, accel));
+                if (newMotion.horizontalDistance() > maxSpeed) {
+                    newMotion = newMotion.normalize().multiply(maxSpeed);
+                }
+                setDeltaMovement(newMotion);
+            }
+        } else if (backward) {
+            if (currentSpeed > -maxReverse) {
+                Vec3 newMotion = motion.subtract(motion.normalize().multiply(accel, 0, accel));
+                if (newMotion.horizontalDistance() > maxReverse) {
+                    newMotion = newMotion.normalize().multiply(-maxReverse);
+                }
+                setDeltaMovement(newMotion);
+            }
+        }
+
+        if (braking && currentSpeed > 0.01) {
+            Vec3 newMotion = motion.multiply(1.0 - brake, 1.0, 1.0 - brake);
+            if (newMotion.horizontalDistance() < 0.01) {
+                newMotion = new Vec3(0, motion.y, 0);
+            }
+            setDeltaMovement(newMotion);
+        }
+
+        if (!forward && !backward && currentSpeed > 0.001) {
+            double friction = 0.98;
+            Vec3 newMotion = motion.multiply(friction, 1.0, friction);
+            if (newMotion.horizontalDistance() < 0.001) {
+                newMotion = new Vec3(0, motion.y, 0);
+            }
+            setDeltaMovement(newMotion);
+        }
     }
 
     @Override

@@ -1,6 +1,5 @@
 {
   "itemGroup.traincraft": "Traincraft",
-
   "block.traincraft.oil_sand": "Oil Sand",
   "block.traincraft.petrol_ore": "Petrol Ore",
   "block.traincraft.copper_ore": "Copper Ore",
@@ -18,7 +17,6 @@
   "block.traincraft.wind_mill": "Windmill",
   "block.traincraft.generator_diesel": "Diesel Generator",
   "block.traincraft.battery": "Battery",
-
   "item.traincraft.steel_ingot": "Steel Ingot",
   "item.traincraft.steel_dust": "Steel Dust",
   "item.traincraft.coal_dust": "Coal Dust",
@@ -30,7 +28,6 @@
   "item.traincraft.steel_chimney": "Steel Chimney",
   "item.traincraft.plastic": "Plastic",
   "item.traincraft.copper_ingot": "Copper Ingot",
-
   "item.traincraft.balloon": "Balloon",
   "item.traincraft.bogie_iron": "Iron Bogie",
   "item.traincraft.bogie_wood": "Wood Bogie",
@@ -60,7 +57,6 @@
   "item.traincraft.transformer": "Transformer",
   "item.traincraft.transmission": "Hydraulic Transmission",
   "item.traincraft.fine_copper_wire": "Fine Copper Wire",
-
   "item.traincraft.wrench": "Wrench",
   "item.traincraft.canister": "Canister",
   "item.traincraft.connector": "Connector",
@@ -68,7 +64,6 @@
   "item.traincraft.guide": "Traincraft Guide",
   "item.traincraft.chunk_loader_activator": "Chunk Loader Activator",
   "item.traincraft.fuel": "Fuel",
-
   "item.traincraft.overalls": "Engineer's Overalls",
   "item.traincraft.jacket": "Reflective Jacket",
   "item.traincraft.hat": "Engineer's Hat",
@@ -82,8 +77,9 @@
   "item.traincraft.composite_suit_chest": "Composite Suit Chest",
   "item.traincraft.composite_suit_pants": "Composite Suit Pants",
   "item.traincraft.composite_suit_feet": "Composite Suit Boots",
-
   "fluid_type.traincraft.oil": "Oil",
   "fluid_type.traincraft.refined_fuel": "Refined Fuel",
-  "fluid_type.traincraft.diesel": "Diesel Fuel"
+  "fluid_type.traincraft.diesel": "Diesel Fuel",
+  "block.traincraft.signal": "Signal",
+  "block.traincraft.switch_stand": "Switch Stand"
 }

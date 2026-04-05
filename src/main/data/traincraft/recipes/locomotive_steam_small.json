@@ -2,7 +2,8 @@
   "type": "traincraft:assembly_table",
   "tier": 1,
   "result": {
-    "id": "traincraft:locomotive_steam_small_spawn_egg"
+    "id": "traincraft:locomotive_steam_small_spawn_egg",
+    "count": 1
   },
   "ingredients": [
     { "ingredient": { "item": "traincraft:steel_frame" }, "count": 2 },
