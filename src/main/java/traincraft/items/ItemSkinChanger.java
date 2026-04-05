@@ -7,7 +7,6 @@ package traincraft.items;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,9 +32,9 @@ public class ItemSkinChanger extends Item {
         Vec3 end = start.add(look.scale(5.0));
         AABB box = new AABB(start, end).inflate(1.0);
 
-        List<AbstractRollingStock<?>> entities = level.getEntitiesOfClass(AbstractRollingStock.class, box);
+        List<AbstractRollingStock> entities = level.getEntitiesOfClass(AbstractRollingStock.class, box);
         if (!entities.isEmpty()) {
-            AbstractRollingStock<?> rollingStock = entities.get(0);
+            AbstractRollingStock rollingStock = entities.get(0);
             if (!level.isClientSide) {
                 int nextSkin = rollingStock.getNextSkinId();
                 rollingStock.setActiveSkin(nextSkin);
