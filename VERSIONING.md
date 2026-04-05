@@ -14,19 +14,19 @@ Using **SemVer** with pre-release versioning: `MAJOR.MINOR.PATCH[-PRERELEASE]`
 ## Current Status (5.0.0-alpha1)
 
 ### Completed (~95% feature parity)
-- ✅ 17 blocks with full functionality
-- ✅ 78+ items including all materials, train parts, and tools
-- ✅ 14 armor pieces across 4 sets
-- ✅ 3 fluids with source and flowing variants
-- ✅ 10 tile entities (6 with full GUI/behavior)
-- ✅ Rolling stock entity framework with linking, skins, seats
-- ✅ LocomotiveSteamSmall with renderer and spawn egg
-- ✅ World generation (copper ore, petrol ore, oil sand)
-- ✅ 4 recipe types (distillery, assembly table, train workbench, smelting)
-- ✅ All legacy GUI textures (40) converted and in use
-- ✅ All legacy block/item textures (400+) converted and in use
-- ✅ Full English localization
-- ✅ GitHub Actions CI workflow
+- [x] 17 blocks with full functionality
+- [x] 78+ items including all materials, train parts, and tools
+- [x] 14 armor pieces across 4 sets
+- [x] 3 fluids with source and flowing variants
+- [x] 10 tile entities (6 with full GUI/behavior)
+- [x] Rolling stock entity framework with linking, skins, seats
+- [x] LocomotiveSteamSmall with renderer and spawn egg
+- [x] World generation (copper ore, petrol ore, oil sand)
+- [x] 4 recipe types (distillery, assembly table, train workbench, smelting)
+- [x] All legacy GUI textures (40) converted and in use
+- [x] All legacy block/item textures (400+) converted and in use
+- [x] Full English localization
+- [x] GitHub Actions CI workflow
 
 ### Exceeds Legacy
 - Open Hearth Furnace (was empty placeholder, now full smelting)

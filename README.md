@@ -84,16 +84,16 @@ The port is at approximately **95% feature parity** with the original 1.12.2 mod
 
 | Category | Legacy | Port | Status |
 |----------|--------|------|--------|
-| Blocks | 17 | 17 | ✅ 100% |
-| Items | ~40 | ~78 | ✅ 195% |
-| Armor | 13 | 13 | ✅ 100% |
-| Fluids | 3 | 6 | ✅ 200% |
-| Tile Entities | 5+ | 10 | ✅ 100%+ |
-| Entities | 1* | 1+ | ✅ 100%+ |
-| Recipe Types | 4 | 4 | ✅ 100% |
-| GUI Textures | 37 | 40 | ✅ 108% |
-| Block Textures | 41 | 111 | ✅ 270% |
-| Item Textures | 8+ | 315 | ✅ 100%+ |
+| Blocks | 17 | 17 | [x] 100% |
+| Items | ~40 | ~78 | [x] 195% |
+| Armor | 13 | 13 | [x] 100% |
+| Fluids | 3 | 6 | [x] 200% |
+| Tile Entities | 5+ | 10 | [x] 100%+ |
+| Entities | 1* | 1+ | [x] 100%+ |
+| Recipe Types | 4 | 4 | [x] 100% |
+| GUI Textures | 37 | 40 | [x] 108% |
+| Block Textures | 41 | 111 | [x] 270% |
+| Item Textures | 8+ | 315 | [x] 100%+ |
 
 *LocomotiveSteamSmall was commented out in legacy but is fully implemented in the port.
 
