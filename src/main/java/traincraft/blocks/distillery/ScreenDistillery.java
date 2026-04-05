@@ -14,7 +14,7 @@ import traincraft.Traincraft;
 
 public class ScreenDistillery extends AbstractContainerScreen<ContainerDistillery> {
 
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/gui/gui_distillery.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/gui/gui_distillation_tower2.png");
 
     public ScreenDistillery(ContainerDistillery menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

@@ -100,6 +100,10 @@ public class TCItems {
     public static final DeferredHolder<Item, Item> CHUNK_LOADER_ACTIVATOR = ITEMS.register("chunk_loader_activator",
         () -> new ItemChunkLoaderActivator());
     public static final DeferredHolder<Item, Item> FUEL = registerSimpleItem("fuel");
+    public static final DeferredHolder<Item, Item> ATO_CARD = ITEMS.register("ato_card",
+        () -> new ItemATOCard());
+    public static final DeferredHolder<Item, Item> WIRELESS_TRANSMITTER = ITEMS.register("wireless_transmitter",
+        () -> new ItemWirelessTransmitter());
 
     public static final DeferredHolder<Item, Item> LOCOMOTIVE_STEAM_SMALL_SPAWN_EGG = ITEMS.register("locomotive_steam_small_spawn_egg",
         () -> new RollingStockSpawnEggItem(
