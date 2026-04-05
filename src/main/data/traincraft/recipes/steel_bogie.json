@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "I I",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "traincraft:steel_ingot"
+    }
+  },
+  "result": {
+    "id": "traincraft:steel_bogie",
+    "count": 2
+  }
+}

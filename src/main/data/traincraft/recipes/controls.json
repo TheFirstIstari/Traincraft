@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "traincraft:steel_ingot"
+    },
+    "C": {
+      "item": "traincraft:circuit"
+    }
+  },
+  "result": {
+    "id": "traincraft:controls"
+  }
+}

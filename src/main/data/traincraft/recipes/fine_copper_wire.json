@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "I I",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "traincraft:copper_ingot"
+    }
+  },
+  "result": {
+    "id": "traincraft:fine_copper_wire",
+    "count": 4
+  }
+}

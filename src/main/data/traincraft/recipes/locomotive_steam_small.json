@@ -1,0 +1,19 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 1,
+  "result": {
+    "id": "traincraft:locomotive_steam_small_spawn_egg"
+  },
+  "ingredients": [
+    { "ingredient": { "item": "traincraft:steel_frame" }, "count": 2 },
+    { "ingredient": { "item": "traincraft:steel_bogie" }, "count": 2 },
+    { "ingredient": { "item": "traincraft:boiler_iron" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:cab_iron" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:engine_steam" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:chimney_iron" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:controls" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:seats" }, "count": 1 },
+    { "ingredient": { "item": "traincraft:piston" }, "count": 2 },
+    { "ingredient": { "item": "traincraft:camshaft" }, "count": 1 }
+  ]
+}
