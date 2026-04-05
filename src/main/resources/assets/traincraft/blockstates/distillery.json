@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "active=false": { "model": "traincraft:block/distillery" },
+    "active=true": { "model": "traincraft:block/distillery_on" }
+  }
+}

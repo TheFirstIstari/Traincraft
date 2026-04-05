@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "traincraft:block/assembly_3_top",
+    "front": "traincraft:block/assembly_3_front",
+    "side": "traincraft:block/assembly_3_side"
+  }
+}
