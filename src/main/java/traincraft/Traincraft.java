@@ -26,7 +26,9 @@ import traincraft.liquids.TCLiquids;
 import traincraft.network.TCMenus;
 import traincraft.recipe.DistilleryRecipe;
 import traincraft.recipe.TCRecipes;
+import traincraft.renderer.EntityFreightCartRenderer;
 import traincraft.renderer.LocomotiveSteamSmallRenderer;
+import traincraft.renderer.EntityPassengerCartRenderer;
 import traincraft.tile.TCTiles;
 
 @Mod(Traincraft.MOD_ID)
@@ -77,5 +79,7 @@ public class Traincraft {
 
     private void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(TCEntities.LOCOMOTIVE_STEAM_SMALL.get(), LocomotiveSteamSmallRenderer::new);
+        event.registerEntityRenderer(TCEntities.FREIGHT_CART.get(), EntityFreightCartRenderer::new);
+        event.registerEntityRenderer(TCEntities.PASSENGER_CART.get(), EntityPassengerCartRenderer::new);
     }
 }

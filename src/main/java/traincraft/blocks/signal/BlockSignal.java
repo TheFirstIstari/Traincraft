@@ -61,7 +61,7 @@ public class BlockSignal extends Block implements SimpleWaterloggedBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultState
+        return this.defaultBlockState()
             .setValue(FACING, context.getHorizontalDirection().getOpposite())
             .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }

@@ -108,4 +108,10 @@ public class TCItems {
     public static final DeferredHolder<Item, Item> LOCOMOTIVE_STEAM_SMALL_SPAWN_EGG = ITEMS.register("locomotive_steam_small_spawn_egg",
         () -> new RollingStockSpawnEggItem(
             TCEntities.LOCOMOTIVE_STEAM_SMALL, new Item.Properties()));
+    public static final DeferredHolder<Item, Item> FREIGHT_CART_SPAWN_EGG = ITEMS.register("freight_cart_spawn_egg",
+        () -> new RollingStockSpawnEggItem(
+            TCEntities.FREIGHT_CART, new Item.Properties()));
+    public static final DeferredHolder<Item, Item> PASSENGER_CART_SPAWN_EGG = ITEMS.register("passenger_cart_spawn_egg",
+        () -> new RollingStockSpawnEggItem(
+            TCEntities.PASSENGER_CART, new Item.Properties()));
 }

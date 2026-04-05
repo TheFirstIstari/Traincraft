@@ -6,7 +6,7 @@
 package traincraft.entity.rollingstock;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import traincraft.api.AbstractRollingStock;
@@ -62,7 +62,7 @@ public class EntityFreightCart extends AbstractRollingStock<EntityFreightCart> {
     }
 
     @Override
-    public net.minecraft.world.item.ItemStack getDropItem() {
-        return Items.MINECART.getDefaultInstance();
+    public Item getDropItem() {
+        return Items.MINECART;
     }
 }

@@ -46,9 +46,9 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
     private double travelDistance = 0D;
     private final Map<String, net.minecraft.resources.ResourceLocation> skins = new HashMap<>();
     @Nullable
-    private AbstractRollingStock<?> next;
+    protected AbstractRollingStock<?> next;
     @Nullable
-    private AbstractRollingStock<?> previous;
+    protected AbstractRollingStock<?> previous;
     private final List<Vec3> axes = new ArrayList<>();
     private final List<PassengerSeat> seats = new ArrayList<>();
 
@@ -81,50 +81,24 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
 
     private void applyCustomPhysics(LivingEntity controller) {
         double maxSpeed = getMaxSpeed() / 20.0;
-        double maxReverse = getMaxReverseSpeed() / 20.0;
         double accel = getAcceleration() / 20.0;
         double brake = getBreakPower() / 20.0;
 
         Vec3 motion = getDeltaMovement();
         double currentSpeed = motion.horizontalDistance();
 
-        boolean forward = controller.input.forward();
-        boolean backward = controller.input.left() || controller.input.right();
-        boolean braking = controller.input.down();
-
-        if (forward) {
-            if (currentSpeed < maxSpeed) {
-                Vec3 newMotion = motion.add(motion.normalize().multiply(accel, 0, accel));
-                if (newMotion.horizontalDistance() > maxSpeed) {
-                    newMotion = newMotion.normalize().multiply(maxSpeed);
-                }
-                setDeltaMovement(newMotion);
-            }
-        } else if (backward) {
-            if (currentSpeed > -maxReverse) {
-                Vec3 newMotion = motion.subtract(motion.normalize().multiply(accel, 0, accel));
-                if (newMotion.horizontalDistance() > maxReverse) {
-                    newMotion = newMotion.normalize().multiply(-maxReverse);
-                }
-                setDeltaMovement(newMotion);
-            }
+        if (maxSpeed > 0 && currentSpeed > maxSpeed) {
+            Vec3 dir = motion.normalize();
+            setDeltaMovement(new Vec3(dir.x * maxSpeed, motion.y, dir.z * maxSpeed));
         }
 
-        if (braking && currentSpeed > 0.01) {
-            Vec3 newMotion = motion.multiply(1.0 - brake, 1.0, 1.0 - brake);
-            if (newMotion.horizontalDistance() < 0.01) {
-                newMotion = new Vec3(0, motion.y, 0);
-            }
-            setDeltaMovement(newMotion);
-        }
-
-        if (!forward && !backward && currentSpeed > 0.001) {
-            double friction = 0.98;
-            Vec3 newMotion = motion.multiply(friction, 1.0, friction);
+        if (currentSpeed > 0.01) {
+            double friction = 1.0 - brake;
+            Vec3 newMotion = new Vec3(motion.x * friction, motion.y, motion.z * friction);
             if (newMotion.horizontalDistance() < 0.001) {
                 newMotion = new Vec3(0, motion.y, 0);
             }
-            setDeltaMovement(newMotion);
+            setDeltaMovement(new Vec3(newMotion.x, motion.y, newMotion.z));
         }
     }
 

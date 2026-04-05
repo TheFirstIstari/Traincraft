@@ -12,6 +12,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.minecraft.core.registries.Registries;
 import traincraft.Traincraft;
 import traincraft.api.AbstractRollingStock;
+import traincraft.entity.rollingstock.EntityFreightCart;
+import traincraft.entity.rollingstock.EntityPassengerCart;
 
 public class TCEntities {
 
@@ -22,4 +24,16 @@ public class TCEntities {
             .sized(0.98f, 0.98f)
             .clientTrackingRange(10)
             .build("locomotive_steam_small"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<EntityFreightCart>> FREIGHT_CART = ENTITIES.register("freight_cart",
+        () -> EntityType.Builder.of(EntityFreightCart::new, MobCategory.MISC)
+            .sized(0.98f, 0.98f)
+            .clientTrackingRange(10)
+            .build("freight_cart"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<EntityPassengerCart>> PASSENGER_CART = ENTITIES.register("passenger_cart",
+        () -> EntityType.Builder.of(EntityPassengerCart::new, MobCategory.MISC)
+            .sized(0.98f, 0.98f)
+            .clientTrackingRange(10)
+            .build("passenger_cart"));
 }
