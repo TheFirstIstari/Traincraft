@@ -5,39 +5,74 @@ Using **SemVer** with pre-release versioning: `MAJOR.MINOR.PATCH[-PRERELEASE]`
 
 ## Versioning Line
 
-| Version | Minecraft | Status | Notes |
-|---------|-----------|--------|-------|
-| 4.4.1 | 1.7.10 | Legacy | Last 1.7.10 release |
-| 4.4.1_022 | 1.12.2 | Legacy | Last 1.12.2 release |
-| **5.0.0-alpha1** | **1.20.4** | **Planned** | First NeoForge release |
-| **5.1.0-alpha1** | **1.21.11** | **Planned** | Second release |
+| Version | Minecraft | NeoForge | Status | Notes |
+|---------|-----------|----------|--------|-------|
+| 4.4.1 | 1.7.10 | Forge | Legacy | Last 1.7.10 release |
+| 4.4.1_022 | 1.12.2 | Forge | Legacy | Last 1.12.2 release |
+| **5.0.0-alpha1** | **1.21.1** | **21.1.2** | **In Development** | NeoForge rewrite |
+
+## Current Status (5.0.0-alpha1)
+
+### Completed (~95% feature parity)
+- ✅ 17 blocks with full functionality
+- ✅ 78+ items including all materials, train parts, and tools
+- ✅ 14 armor pieces across 4 sets
+- ✅ 3 fluids with source and flowing variants
+- ✅ 10 tile entities (6 with full GUI/behavior)
+- ✅ Rolling stock entity framework with linking, skins, seats
+- ✅ LocomotiveSteamSmall with renderer and spawn egg
+- ✅ World generation (copper ore, petrol ore, oil sand)
+- ✅ 4 recipe types (distillery, assembly table, train workbench, smelting)
+- ✅ All legacy GUI textures (40) converted and in use
+- ✅ All legacy block/item textures (400+) converted and in use
+- ✅ Full English localization
+- ✅ GitHub Actions CI workflow
+
+### Exceeds Legacy
+- Open Hearth Furnace (was empty placeholder, now full smelting)
+- Energy blocks (all 4 generate/store RF, were empty in legacy)
+- LocomotiveSteamSmall (was commented out, now active with renderer)
+- Multi-face block textures (proper top/front/side variants)
+- Modern NeoForge APIs (capabilities, DeferredRegister, data generation)
+
+### Remaining for 5.0.0-alpha1
+- [ ] Guide book system
+- [ ] Sounds
+- [ ] Train workbench recipe JSONs
+- [ ] Armor dyeing
+- [ ] JEI compatibility
 
 ## Release Plan
 
-### Phase 1: Alpha (5.0.0-alpha1 through 5.0.0-alphaN)
-- Target: 1.20.4 LTS
-- Focus: Core functionality (trains, tracks, basic rolling stock)
-- No compatibility guarantees
-- Skip features that require heavy API changes
+### Phase 1: Alpha (5.0.0-alpha1)
+- Target: 1.21.1
+- Focus: Core functionality at feature parity with legacy
+- All blocks, items, fluids, tile entities, entities
+- Basic rolling stock with renderer
+- World generation
+- Recipe system
 
-### Phase 2: Alpha (5.1.0-alpha1+)
-- Target: 1.21.11 (latest)
-- Leverage updated NeoForge APIs
-- Performance improvements
-- Better compatibility with 1.21 mods
+### Phase 2: Alpha (5.0.0-alpha2+)
+- Guide book system
+- Sounds
+- Armor dyeing
+- More rolling stock types
+- JEI compatibility
 
-### Phase 2: Beta (5.0.0-beta1+)
+### Phase 3: Beta (5.0.0-beta1+)
 - Feature freeze
 - Focus on stability and bug fixes
-- Add back non-essential features
+- Performance optimization
+- Multiplayer testing
 
-### Phase 3: Stable (5.0.0)
-- Full feature parity with 4.4.1_022 (where possible)
+### Phase 4: Stable (5.0.0)
+- Full feature parity with 4.4.1_022
 - Production ready
+- CurseForge/Modrinth release
 
 ## Dependencies
-- NeoForge 20.4.x (for 1.20.4)
-- JEI (Just Enough Items) - separate release for compatibility
+- NeoForge 21.1.2 (for 1.21.1)
+- Java 21+
 
 ## Distribution
 - GitHub Releases
@@ -46,5 +81,5 @@ Using **SemVer** with pre-release versioning: `MAJOR.MINOR.PATCH[-PRERELEASE]`
 
 ## Build Artifacts
 ```
-Traincraft-5.0.0-alpha1-1.20.4.jar
+Traincraft-5.0.0-alpha1-1.21.1.jar
 ```
