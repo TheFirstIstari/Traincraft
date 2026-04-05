@@ -10,11 +10,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class ContainerTrainWorkbench extends AbstractContainerMenu {
 
     private final TileTrainWorkbench tile;
+    private final ItemStackHandler handler;
 
     public ContainerTrainWorkbench(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, null);
@@ -23,14 +25,12 @@ public class ContainerTrainWorkbench extends AbstractContainerMenu {
     public ContainerTrainWorkbench(int containerId, Inventory playerInventory, TileTrainWorkbench tile) {
         super(traincraft.network.TCMenus.TRAIN_WORKBENCH.get(), containerId);
         this.tile = tile;
+        this.handler = tile != null ? tile.getItemHandler() : new ItemStackHandler(9);
 
-        if (tile != null) {
-            var handler = tile.getItemHandler();
-            // 3x3 crafting grid
-            for (int row = 0; row < 3; row++) {
-                for (int col = 0; col < 3; col++) {
-                    addSlot(new SlotItemHandler(handler, col + row * 3, 30 + col * 18, 17 + row * 18));
-                }
+        // 3x3 crafting grid - always added for consistent slot count
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                addSlot(new SlotItemHandler(handler, col + row * 3, 30 + col * 18, 17 + row * 18));
             }
         }
 
@@ -49,6 +49,9 @@ public class ContainerTrainWorkbench extends AbstractContainerMenu {
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         ItemStack result = ItemStack.EMPTY;
+        if (index < 0 || index >= this.slots.size()) {
+            return result;
+        }
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack stack = slot.getItem();
