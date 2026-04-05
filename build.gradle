@@ -1,5 +1,7 @@
 plugins {
-    id 'net.neoforged.moddev' version '1.0.11'
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.141'
     id 'idea'
 }
 
@@ -11,7 +13,12 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 neoForge {
     version = "21.1.2"
-    
+
+    parchment {
+        mappingsVersion = "2024.06.23"
+        minecraftVersion = "1.21"
+    }
+
     runs {
         client {
             type = "client"
@@ -20,7 +27,7 @@ neoForge {
             type = "server"
         }
     }
-    
+
     mods {
         traincraft {
             sourceSet sourceSets.main
