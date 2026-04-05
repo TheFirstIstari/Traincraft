@@ -25,7 +25,6 @@ jobs:
         
     - name: Build with Gradle
       run: ./gradlew build --no-daemon
-      working-directory: Traincraft-source
       
     - name: Create Tag
       run: |
@@ -39,7 +38,7 @@ jobs:
       with:
         tag_name: ${{ github.event.inputs.version }}
         name: "Traincraft ${{ github.event.inputs.version }}"
-        files: Traincraft-source/build/libs/*.jar
+        files: build/libs/*.jar
         draft: true
         prerelease: ${{ contains(github.event.inputs.version, 'alpha') || contains(github.event.inputs.version, 'beta') }}
         generate_release_notes: true
