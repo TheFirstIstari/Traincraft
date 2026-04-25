@@ -26,22 +26,22 @@ public class TCArmor {
         () -> new ArmorItem(TCArmorMaterials.GENERAL, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> TICKETMAN_JACKET = ARMOR_ITEMS.register("ticketman_jacket",
-        () -> new ArmorItem(TCArmorMaterials.TICKETMAN, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+        () -> new DyeableArmorItem(TCArmorMaterials.TICKETMAN, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> TICKETMAN_PANTS = ARMOR_ITEMS.register("ticketman_pants",
-        () -> new ArmorItem(TCArmorMaterials.TICKETMAN, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+        () -> new DyeableArmorItem(TCArmorMaterials.TICKETMAN, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> TICKETMAN_HAT = ARMOR_ITEMS.register("ticketman_hat",
-        () -> new ArmorItem(TCArmorMaterials.TICKETMAN, ArmorItem.Type.HELMET, new Item.Properties()));
+        () -> new DyeableArmorItem(TCArmorMaterials.TICKETMAN, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> DRIVER_JACKET = ARMOR_ITEMS.register("driver_jacket",
-        () -> new ArmorItem(TCArmorMaterials.DRIVER, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+        () -> new DyeableArmorItem(TCArmorMaterials.DRIVER, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> DRIVER_PANTS = ARMOR_ITEMS.register("driver_pants",
-        () -> new ArmorItem(TCArmorMaterials.DRIVER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+        () -> new DyeableArmorItem(TCArmorMaterials.DRIVER, ArmorItem.Type.LEGGINGS, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> DRIVER_HAT = ARMOR_ITEMS.register("driver_hat",
-        () -> new ArmorItem(TCArmorMaterials.DRIVER, ArmorItem.Type.HELMET, new Item.Properties()));
+        () -> new DyeableArmorItem(TCArmorMaterials.DRIVER, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> COMPOSITE_SUIT_HEAD = ARMOR_ITEMS.register("composite_suit_head",
         () -> new ArmorItem(TCArmorMaterials.COMPOSITE, ArmorItem.Type.HELMET, new Item.Properties()));
