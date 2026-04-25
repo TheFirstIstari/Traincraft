@@ -13,6 +13,8 @@ import traincraft.blocks.TCBlocks;
 import traincraft.blocks.assemblytable.TileAssemblyTable;
 import traincraft.blocks.distillery.TileDistillery;
 import traincraft.blocks.trainworkbench.TileTrainWorkbench;
+import traincraft.tile.TileSignal;
+import traincraft.tile.TileSwitchStand;
 import traincraft.blocks.openhearthfurnace.TileOpenHearthFurnace;
 
 import java.util.function.Supplier;
@@ -61,4 +63,10 @@ public class TCTiles {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileBattery>> BATTERY = TILES.register("battery",
         () -> BlockEntityType.Builder.of(TileBattery::new, TCBlocks.BATTERY.get()).build(null));
+        
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileSignal>> SIGNAL = TILES.register("signal",
+        () -> BlockEntityType.Builder.of(TileSignal::new, TCBlocks.SIGNAL.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileSwitchStand>> SWITCH_STAND = TILES.register("switch_stand",
+        () -> BlockEntityType.Builder.of(TileSwitchStand::new, TCBlocks.SWITCH_STAND.get()).build(null));
+
 }

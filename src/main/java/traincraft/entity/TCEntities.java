@@ -14,6 +14,8 @@ import traincraft.Traincraft;
 import traincraft.api.AbstractRollingStock;
 import traincraft.entity.rollingstock.EntityFreightCart;
 import traincraft.entity.rollingstock.EntityPassengerCart;
+import traincraft.entity.bogie.EntityBogie;
+import traincraft.entity.LocomotiveSteamSmall;
 
 public class TCEntities {
 
@@ -30,6 +32,12 @@ public class TCEntities {
             .sized(0.98f, 0.98f)
             .clientTrackingRange(10)
             .build("freight_cart"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<EntityBogie>> BOGIE = ENTITIES.register("bogie",
+        () -> EntityType.Builder.of(EntityBogie::new, MobCategory.MISC)
+            .sized(0.98f, 0.98f)
+            .clientTrackingRange(10)
+            .build("bogie"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<EntityPassengerCart>> PASSENGER_CART = ENTITIES.register("passenger_cart",
         () -> EntityType.Builder.of(EntityPassengerCart::new, MobCategory.MISC)

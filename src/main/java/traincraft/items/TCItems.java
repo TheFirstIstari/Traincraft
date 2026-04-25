@@ -45,6 +45,8 @@ public class TCItems {
     public static final DeferredHolder<Item, Item> WIND_MILL = registerBlockItem(TCBlocks.WIND_MILL);
     public static final DeferredHolder<Item, Item> GENERATOR_DIESEL = registerBlockItem(TCBlocks.GENERATOR_DIESEL);
     public static final DeferredHolder<Item, Item> BATTERY = registerBlockItem(TCBlocks.BATTERY);
+    public static final DeferredHolder<Item, Item> SIGNAL = registerBlockItem(TCBlocks.SIGNAL);
+    public static final DeferredHolder<Item, Item> SWITCH_STAND = registerBlockItem(TCBlocks.SWITCH_STAND);
 
     public static final DeferredHolder<Item, Item> STEEL_INGOT = registerSimpleItem("steel_ingot");
     public static final DeferredHolder<Item, Item> STEEL_DUST = registerSimpleItem("steel_dust");
