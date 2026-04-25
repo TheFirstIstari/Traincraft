@@ -1,0 +1,50 @@
+{
+  "locomotive.steam.whistle": {
+    "sounds": [
+      {
+        "name": "traincraft:locomotive/steam/whistle",
+        "stream": true
+      }
+    ]
+  },
+  "locomotive.steam.engine": {
+    "sounds": [
+      {
+        "name": "traincraft:locomotive/steam/engine",
+        "stream": true
+      }
+    ]
+  },
+  "train.wheels": {
+    "sounds": [
+      {
+        "name": "traincraft:train/wheels",
+        "stream": false
+      }
+    ]
+  },
+  "assembly_table.craft": {
+    "sounds": [
+      {
+        "name": "traincraft:assembly_table/craft",
+        "stream": false
+      }
+    ]
+  },
+  "distillery.process": {
+    "sounds": [
+      {
+        "name": "traincraft:distillery/process",
+        "stream": false
+      }
+    ]
+  },
+  "signal.activate": {
+    "sounds": [
+      {
+        "name": "traincraft:signal/activate",
+        "stream": false
+      }
+    ]
+  }
+}

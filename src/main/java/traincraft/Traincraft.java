@@ -32,6 +32,7 @@ import traincraft.renderer.EntityBogieRenderer;
 import traincraft.renderer.LocomotiveSteamSmallRenderer;
 import traincraft.renderer.EntityPassengerCartRenderer;
 import traincraft.tile.TCTiles;
+import traincraft.TCSounds;
 
 @Mod(Traincraft.MOD_ID)
 public class Traincraft {
@@ -52,6 +53,7 @@ public class Traincraft {
         TCMenus.MENUS.register(modEventBus);
         TCRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         TCRecipes.RECIPE_TYPES.register(modEventBus);
+        TCSounds.SOUND_EVENTS.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreativeTabContents);
