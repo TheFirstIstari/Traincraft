@@ -15,6 +15,7 @@ import traincraft.blocks.TCBlocks;
 import traincraft.entity.TCEntities;
 
 import java.util.function.Supplier;
+import traincraft.items.ItemGuide;
 
 public class TCItems {
 
@@ -98,7 +99,8 @@ public class TCItems {
         () -> new ItemConnector());
     public static final DeferredHolder<Item, Item> SKIN_CHANGER = ITEMS.register("skin_changer",
         () -> new ItemSkinChanger());
-    public static final DeferredHolder<Item, Item> GUIDE = registerSimpleItem("guide");
+    public static final DeferredHolder<Item, Item> GUIDE = ITEMS.register("guide",
+        () -> new ItemGuide());
     public static final DeferredHolder<Item, Item> CHUNK_LOADER_ACTIVATOR = ITEMS.register("chunk_loader_activator",
         () -> new ItemChunkLoaderActivator());
     public static final DeferredHolder<Item, Item> FUEL = registerSimpleItem("fuel");

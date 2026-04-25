@@ -81,5 +81,6 @@
   "fluid_type.traincraft.refined_fuel": "Refined Fuel",
   "fluid_type.traincraft.diesel": "Diesel Fuel",
   "block.traincraft.signal": "Signal",
-  "block.traincraft.switch_stand": "Switch Stand"
+  "block.traincraft.switch_stand": "Switch Stand",
+  "item.traincraft.guide.tooltip": "Right-click to open the Traincraft Guide Book"
 }
