@@ -26,7 +26,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
-import traincraft.recipe.DistilleryRecipe;
+import traincraft.TCSounds;
 
 public class TileDistillery extends BlockEntity implements MenuProvider {
 
@@ -69,7 +69,7 @@ public class TileDistillery extends BlockEntity implements MenuProvider {
         };
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, TileDistillery entity) {
+        public static void serverTick(Level level, BlockPos pos, BlockState state, TileDistillery entity) {
         entity.burnTime--;
         if (entity.burnTime <= 0) {
             entity.burnTime = entity.maxBurnTime = 0;
@@ -90,6 +90,12 @@ public class TileDistillery extends BlockEntity implements MenuProvider {
 
         if (entity.burnTime > 0 && entity.recipeBurnTime <= 0) {
             entity.tryStartRecipe();
+        }
+
+        // Play distillery processing sound periodically
+        if (entity.burnTime > 0 && level.getGameTime() % 20 == 0) {
+            level.playSound(null, pos, TCSounds.DISTILLERY_PROCESS.get(), 
+                net.minecraft.sounds.SoundSource.BLOCKS, 0.3f, 1.0f);
         }
 
         entity.setChanged();

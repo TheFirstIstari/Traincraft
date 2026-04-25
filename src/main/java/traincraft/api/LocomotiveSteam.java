@@ -7,9 +7,13 @@ package traincraft.api;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -18,6 +22,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import traincraft.TCSounds;
 
 public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends AbstractRollingStock<A> {
 
@@ -94,12 +99,22 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
         return this.waterTank;
     }
 
-    @Override
+        @Override
     public void tick() {
         super.tick();
 
         if (this.level().isClientSide) {
             return;
+        }
+
+        // Play engine sound when the locomotive is moving
+        if (this.getDeltaMovement().length() > 0.01) {
+            // Play engine sound at a volume based on speed
+            double speed = this.getDeltaMovement().horizontalDistance();
+            float volume = (float) Math.min(0.3 + (speed * 0.5), 1.0);
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), 
+                traincraft.TCSounds.LOCOMOTIVE_STEAM_ENGINE.get(), SoundSource.NEUTRAL, 
+                volume, 1.0f);
         }
 
         if (this.burnTime > 0) {
@@ -127,6 +142,27 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
         }
     }
 
+    
+    /**
+     * Plays the locomotive whistle sound.
+     * This method can be called when the player activates the whistle.
+     */
+    public void playWhistleSound() {
+        if (!this.level().isClientSide) {
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), 
+                TCSounds.LOCOMOTIVE_STEAM_WHISTLE.get(), SoundSource.NEUTRAL, 
+                1.0f, 1.0f);
+        }
+    }
+
+    
+    @Override
+    public boolean handlePlayerClickWithItem(Player player, InteractionHand hand, ItemStack stack, Vec3 hitVector) {
+        // Play whistle sound when player interacts with the locomotive
+        playWhistleSound();
+        return super.handlePlayerClickWithItem(player, hand, stack, hitVector);
+    }
+
     @Override
     protected void readFromNBT(CompoundTag nbt, SyncState state) {
         super.readFromNBT(nbt, state);
@@ -142,6 +178,10 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
     }
 
     @Override
+
+    
+
+    
     protected void writeToNBT(CompoundTag nbt, SyncState state) {
         super.writeToNBT(nbt, state);
         nbt.putInt("burnTime", this.burnTime);

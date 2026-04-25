@@ -50,12 +50,14 @@ public class BlockAssemblyTable extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    @Override
+        @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof TileAssemblyTable tile) {
                 player.openMenu(tile);
+                // Play sound when opening the assembly table
+                level.playSound(null, pos, TCSounds.ASSEMBLY_TABLE_CRAFT.get(), SoundSource.BLOCKS, 0.3f, 1.0f);
             }
         }
         return InteractionResult.SUCCESS;

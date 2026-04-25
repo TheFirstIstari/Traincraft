@@ -6,10 +6,12 @@
 package traincraft.tile;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import traincraft.TCSounds;
 import traincraft.blocks.signal.BlockSignal;
 import traincraft.entity.bogie.EntityBogie;
 import traincraft.tile.TCTiles;
@@ -28,7 +30,7 @@ public class TileSignal extends BaseTile {
         super(TCTiles.SIGNAL.get(), pos, state);
     }
     
-    public static void serverTick(Level level, BlockPos pos, BlockState state, TileSignal tile) {
+        public static void serverTick(Level level, BlockPos pos, BlockState state, TileSignal tile) {
         if (level.isClientSide) {
             return;
         }
@@ -41,6 +43,11 @@ public class TileSignal extends BaseTile {
             tile.previousPoweredState = trainDetected;
             level.setBlockAndUpdate(pos, state.setValue(BlockSignal.POWERED, trainDetected));
             tile.sync(); // Send update to clients
+            
+            // Play signal activation sound when state changes
+            if (trainDetected) {
+                level.playSound(null, pos, TCSounds.SIGNAL_ACTIVATE.get(), SoundSource.BLOCKS, 0.5f, 1.0f);
+            }
         }
     }
     

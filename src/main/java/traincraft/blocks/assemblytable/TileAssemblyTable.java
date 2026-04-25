@@ -7,7 +7,7 @@ package traincraft.blocks.assemblytable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.CompTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import traincraft.TCSounds;
 import traincraft.recipe.AssemblyTableRecipe;
 import traincraft.tile.TCTiles;
 
@@ -105,13 +106,17 @@ public class TileAssemblyTable extends BlockEntity implements MenuProvider {
         currentRecipe = null;
     }
 
-    public void onItemCrafted() {
+        public void onItemCrafted() {
         if (currentRecipe == null || level == null) return;
 
         for (int i = 0; i < 10; i++) {
             var ingredient = currentRecipe.getIngredient(i);
             itemHandler.extractItem(i, ingredient.count(), false);
         }
+
+        // Play crafting sound
+        level.playSound(null, worldPosition, TCSounds.ASSEMBLY_TABLE_CRAFT.get(), 
+            net.minecraft.sounds.SoundSource.BLOCKS, 0.5f, 1.0f);
 
         currentRecipe = null;
         checkForRecipe();
