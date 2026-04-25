@@ -31,4 +31,7 @@ public class TCMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<ContainerOpenHearthFurnace>> OPEN_HEARTH_FURNACE = MENUS.register("open_hearth_furnace",
         () -> new MenuType<>(ContainerOpenHearthFurnace::new, FeatureFlags.DEFAULT_FLAGS));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<ContainerGuideBook>> GUIDE_BOOK = MENUS.register("guide_book",
+        () -> new MenuType<>(ContainerGuideBook::new, FeatureFlags.DEFAULT_FLAGS));
 }

@@ -19,6 +19,7 @@ import traincraft.blocks.assemblytable.ScreenAssemblyTable;
 import traincraft.blocks.distillery.ScreenDistillery;
 import traincraft.blocks.openhearthfurnace.ScreenOpenHearthFurnace;
 import traincraft.blocks.trainworkbench.ScreenTrainWorkbench;
+import traincraft.gui.GuideBookScreen;
 import traincraft.entity.TCEntities;
 import traincraft.items.TCItems;
 import traincraft.items.armor.TCArmor;
@@ -76,6 +77,7 @@ public class Traincraft {
         event.register(TCMenus.ASSEMBLY_TABLE.get(), ScreenAssemblyTable::new);
         event.register(TCMenus.TRAIN_WORKBENCH.get(), ScreenTrainWorkbench::new);
         event.register(TCMenus.OPEN_HEARTH_FURNACE.get(), ScreenOpenHearthFurnace::new);
+        event.register(TCMenus.GUIDE_BOOK.get(), GuideBookScreen::new);
     }
 
     private void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

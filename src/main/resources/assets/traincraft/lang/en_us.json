@@ -82,5 +82,15 @@
   "fluid_type.traincraft.diesel": "Diesel Fuel",
   "block.traincraft.signal": "Signal",
   "block.traincraft.switch_stand": "Switch Stand",
-  "item.traincraft.guide.tooltip": "Right-click to open the Traincraft Guide Book"
+  "item.traincraft.guide.tooltip": "Right-click to open the Traincraft Guide Book",
+  "screen.traincraft.guide_book": "Traincraft Guide Book",
+  "screen.traincraft.guide_book.title": "Traincraft Guide",
+  "screen.traincraft.guide_book.blocks": "Blocks",
+  "screen.traincraft.guide_book.items": "Items",
+  "screen.traincraft.guide_book.entities": "Entities",
+  "screen.traincraft.guide_book.recipes": "Recipes",
+  "screen.traincraft.guide_book.category.blocks": "Blocks",
+  "screen.traincraft.guide_book.category.items": "Items",
+  "screen.traincraft.guide_book.category.entities": "Entities",
+  "screen.traincraft.guide_book.category.recipes": "Recipes"
 }
