@@ -80,26 +80,47 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
     }
 
     private void applyCustomPhysics(LivingEntity controller) {
+        // All values are converted from blocks/sec into blocks/tick.
         double maxSpeed = getMaxSpeed() / 20.0;
-        double accel = getAcceleration() / 20.0;
+        double maxReverse = getMaxReverseSpeed() / 20.0;
+        double accel = getAcceleration() / 400.0;       // gentler than per-tick raw acceleration
         double brake = getBreakPower() / 20.0;
 
         Vec3 motion = getDeltaMovement();
-        double currentSpeed = motion.horizontalDistance();
+        // Throttle input: positive forward (W), negative reverse (S).
+        float throttle = controller.zza;
+        // Strafing (A/D) is reserved for switching/horn etc.; ignore for now.
 
-        if (maxSpeed > 0 && currentSpeed > maxSpeed) {
-            Vec3 dir = motion.normalize();
-            setDeltaMovement(new Vec3(dir.x * maxSpeed, motion.y, dir.z * maxSpeed));
-        }
+        // Determine the train's forward direction in world-space using the controller yaw,
+        // so the player steers along their look direction. The minecart-style track logic
+        // already constrains motion to rails when on rails, so this is a no-op when locked.
+        float yawRad = (float) Math.toRadians(controller.getYRot());
+        Vec3 forward = new Vec3(-Math.sin(yawRad), 0, Math.cos(yawRad));
 
-        if (currentSpeed > 0.01) {
-            double friction = 1.0 - brake;
-            Vec3 newMotion = new Vec3(motion.x * friction, motion.y, motion.z * friction);
-            if (newMotion.horizontalDistance() < 0.001) {
-                newMotion = new Vec3(0, motion.y, 0);
+        // Forward-direction scalar speed (positive = same dir as facing).
+        double forwardSpeed = motion.x * forward.x + motion.z * forward.z;
+
+        if (throttle > 0.01f) {
+            // Accelerate forward.
+            forwardSpeed = Math.min(forwardSpeed + accel * throttle, maxSpeed);
+        } else if (throttle < -0.01f) {
+            // If still rolling forward, brake first; once stopped, accelerate in reverse.
+            if (forwardSpeed > 0) {
+                forwardSpeed = Math.max(forwardSpeed - brake / 20.0, 0);
+            } else {
+                forwardSpeed = Math.max(forwardSpeed - accel * -throttle, -maxReverse);
             }
-            setDeltaMovement(new Vec3(newMotion.x, motion.y, newMotion.z));
+        } else {
+            // Coasting friction.
+            double friction = 0.99;
+            forwardSpeed *= friction;
+            if (Math.abs(forwardSpeed) < 0.001) forwardSpeed = 0;
         }
+
+        // Compose the new horizontal motion from the chosen forward speed.
+        double vx = forward.x * forwardSpeed;
+        double vz = forward.z * forwardSpeed;
+        setDeltaMovement(vx, motion.y, vz);
     }
 
     @Override
