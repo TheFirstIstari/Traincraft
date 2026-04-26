@@ -28,4 +28,10 @@ public class TCRecipes {
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<AssemblyTableRecipe>> ASSEMBLY_TABLE_TYPE = RECIPE_TYPES.register("assembly_table",
         () -> AssemblyTableRecipe.Type.INSTANCE);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<TrainWorkbenchRecipe>> TRAIN_WORKBENCH_SERIALIZER = RECIPE_SERIALIZERS.register("train_workbench",
+        () -> TrainWorkbenchRecipe.Serializer.INSTANCE);
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<TrainWorkbenchRecipe>> TRAIN_WORKBENCH_TYPE = RECIPE_TYPES.register("train_workbench",
+        () -> TrainWorkbenchRecipe.Type.INSTANCE);
 }
