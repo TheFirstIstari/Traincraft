@@ -104,5 +104,8 @@
   "item.traincraft.locomotive_steam_small_spawn_egg": "Small Steam Locomotive Spawn Egg",
   "item.traincraft.locomotive_diesel_small_spawn_egg": "Small Diesel Locomotive Spawn Egg",
   "item.traincraft.freight_cart_spawn_egg": "Freight Cart Spawn Egg",
-  "item.traincraft.passenger_cart_spawn_egg": "Passenger Cart Spawn Egg"
+  "item.traincraft.passenger_cart_spawn_egg": "Passenger Cart Spawn Egg",
+  "item.traincraft.canister.empty": "Empty",
+  "item.traincraft.canister.emptied": "Canister emptied.",
+  "item.traincraft.canister.hint": "Right-click a fluid source to fill, sneak + right-click to empty"
 }

@@ -91,6 +91,31 @@ public abstract class LocomotiveDiesel<A extends LocomotiveDiesel<A>> extends Ab
     }
 
     @Override
+    public boolean handlePlayerClickWithItem(net.minecraft.world.entity.player.Player player,
+                                             net.minecraft.world.InteractionHand hand,
+                                             net.minecraft.world.item.ItemStack stack,
+                                             net.minecraft.world.phys.Vec3 hitVector) {
+        // Refuel the locomotive from a Traincraft canister holding diesel or refined fuel.
+        if (stack.getItem() instanceof traincraft.items.ItemCanister) {
+            FluidStack stored = traincraft.items.ItemCanister.getStored(stack);
+            if (!stored.isEmpty() && isFuelValid(stored)) {
+                int space = this.fuelTank.getCapacity() - this.fuelTank.getFluidAmount();
+                if (this.fuelTank.getFluidAmount() > 0
+                    && this.fuelTank.getFluid().getFluid() != stored.getFluid()) {
+                    return false;
+                }
+                int transfer = Math.min(stored.getAmount(), space);
+                if (transfer > 0) {
+                    this.fuelTank.fill(new FluidStack(stored.getFluid(), transfer), IFluidHandler.FluidAction.EXECUTE);
+                    traincraft.items.ItemCanister.drain(stack, transfer);
+                    return true;
+                }
+            }
+        }
+        return super.handlePlayerClickWithItem(player, hand, stack, hitVector);
+    }
+
+    @Override
     protected void readFromNBT(CompoundTag nbt, SyncState state) {
         super.readFromNBT(nbt, state);
         this.burnTime = nbt.getInt("burnTime");

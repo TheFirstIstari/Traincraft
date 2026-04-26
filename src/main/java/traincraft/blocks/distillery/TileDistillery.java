@@ -93,6 +93,9 @@ public class TileDistillery extends BlockEntity implements MenuProvider {
             entity.tryStartRecipe();
         }
 
+        // Move fluid from the internal tank into a player-provided canister or bucket.
+        entity.tryFillContainer();
+
         // Play distillery processing sound periodically
         if (entity.burnTime > 0 && level.getGameTime() % 20 == 0) {
             level.playSound(null, pos, TCSounds.DISTILLERY_PROCESS.get(), 
@@ -162,6 +165,52 @@ public class TileDistillery extends BlockEntity implements MenuProvider {
     }
 
     private void completeRecipe() {
+    }
+
+    /**
+     * Move up to one canister/bucket worth of fluid out of the tank into the container slot.
+     * <p>
+     * Supports two container types:
+     * <ul>
+     *     <li>An empty Traincraft canister: filled with up to its remaining capacity from the tank.</li>
+     *     <li>A vanilla empty bucket: when the tank holds water, swap for a water bucket.</li>
+     * </ul>
+     * The result is placed in {@link #CONTAINER_OUTPUT_SLOT}, leaving the input slot empty.
+     */
+    private void tryFillContainer() {
+        if (fluidTank.isEmpty()) return;
+        ItemStack input = itemHandler.getStackInSlot(CONTAINER_INPUT_SLOT);
+        if (input.isEmpty()) return;
+        ItemStack outputSlot = itemHandler.getStackInSlot(CONTAINER_OUTPUT_SLOT);
+
+        // Canister handling.
+        if (input.getItem() instanceof traincraft.items.ItemCanister) {
+            // Either move the existing canister forward (single-item slot) or copy it after filling.
+            // Only fill if the output slot is empty so we don't lose work-in-progress canisters.
+            if (!outputSlot.isEmpty()) return;
+            ItemStack toFill = input.copy();
+            int filled = traincraft.items.ItemCanister.fill(toFill, fluidTank.getFluid(),
+                Math.min(fluidTank.getFluidAmount(), 1000));
+            if (filled <= 0) return;
+            fluidTank.drain(filled, IFluidHandler.FluidAction.EXECUTE);
+            input.shrink(1);
+            itemHandler.setStackInSlot(CONTAINER_INPUT_SLOT, input);
+            itemHandler.setStackInSlot(CONTAINER_OUTPUT_SLOT, toFill);
+            setChanged();
+            return;
+        }
+
+        // Vanilla bucket -> water bucket conversion.
+        if (input.is(net.minecraft.world.item.Items.BUCKET)
+            && fluidTank.getFluid().getFluid() == net.minecraft.world.level.material.Fluids.WATER
+            && fluidTank.getFluidAmount() >= 1000
+            && outputSlot.isEmpty()) {
+            fluidTank.drain(1000, IFluidHandler.FluidAction.EXECUTE);
+            input.shrink(1);
+            itemHandler.setStackInSlot(CONTAINER_INPUT_SLOT, input);
+            itemHandler.setStackInSlot(CONTAINER_OUTPUT_SLOT, new ItemStack(net.minecraft.world.item.Items.WATER_BUCKET));
+            setChanged();
+        }
     }
 
     @Override

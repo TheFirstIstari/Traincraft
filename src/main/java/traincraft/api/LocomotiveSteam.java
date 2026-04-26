@@ -158,8 +158,54 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
     
     @Override
     public boolean handlePlayerClickWithItem(Player player, InteractionHand hand, ItemStack stack, Vec3 hitVector) {
-        // Play whistle sound when player interacts with the locomotive
-        playWhistleSound();
+        // 1) Refill the water tank from a vanilla water bucket.
+        if (stack.is(net.minecraft.world.item.Items.WATER_BUCKET)) {
+            int filled = this.waterTank.fill(new FluidStack(net.minecraft.world.level.material.Fluids.WATER, 1000),
+                IFluidHandler.FluidAction.EXECUTE);
+            if (filled > 0) {
+                if (!player.getAbilities().instabuild) {
+                    stack.shrink(1);
+                    ItemStack empty = new ItemStack(net.minecraft.world.item.Items.BUCKET);
+                    if (!player.getInventory().add(empty)) {
+                        player.drop(empty, false);
+                    }
+                }
+                return true;
+            }
+        }
+
+        // 2) Refill the water tank from a Traincraft canister holding the loco's water fluid.
+        if (stack.getItem() instanceof traincraft.items.ItemCanister) {
+            FluidStack stored = traincraft.items.ItemCanister.getStored(stack);
+            if (!stored.isEmpty() && stored.getFluid() == getWaterFluid()) {
+                int space = this.waterTank.getCapacity() - this.waterTank.getFluidAmount();
+                int transfer = Math.min(stored.getAmount(), space);
+                if (transfer > 0) {
+                    this.waterTank.fill(new FluidStack(getWaterFluid(), transfer), IFluidHandler.FluidAction.EXECUTE);
+                    traincraft.items.ItemCanister.drain(stack, transfer);
+                    return true;
+                }
+            }
+        }
+
+        // 3) Push coal or charcoal into the burn slot.
+        if (stack.is(net.minecraft.world.item.Items.COAL) || stack.is(net.minecraft.world.item.Items.CHARCOAL)) {
+            ItemStack burn = this.inventory.getStackInSlot(BURN_SLOT);
+            if (burn.isEmpty()) {
+                ItemStack one = stack.copy();
+                one.setCount(1);
+                this.inventory.setStackInSlot(BURN_SLOT, one);
+                if (!player.getAbilities().instabuild) stack.shrink(1);
+                return true;
+            }
+        }
+
+        // 4) Otherwise, sneak + click plays the whistle.
+        if (player.isShiftKeyDown()) {
+            playWhistleSound();
+            return true;
+        }
+
         return super.handlePlayerClickWithItem(player, hand, stack, hitVector);
     }
 
