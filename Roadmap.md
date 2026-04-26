@@ -2,7 +2,31 @@
 
 This file tracks the development progress of the NeoForge 1.21.1 rewrite.
 
-## Current Status: 5.0.0-alpha1 (Released)
+## Current Status: 5.0.0-alpha3 (in development)
+
+### Shipped in 5.0.0-alpha3
+
+- [x] Player-input throttle (W/S) on rolling stock with fuel-gated acceleration
+- [x] Steam locomotive water-bucket / canister / coal interaction; sneak + click whistle
+- [x] Diesel locomotive entity with a fuel tank that consumes diesel/refined fuel while moving
+- [x] Diesel locomotive engine sound event (placeholder file)
+- [x] Real fluid storage on the canister item (CUSTOM_DATA component)
+- [x] Distillery container slot now fills canisters/buckets from the internal fluid tank
+- [x] Connector item links coupled rolling stock with `handleEntityClick`
+- [x] Coupling physics: leader/follower spring force keeps trains together
+- [x] Persistent coupling links via NBT UUIDs, resolved on tick after chunk load
+- [x] Driver status HUD (action bar) for steam/diesel locomotives
+- [x] Freight cart 27-slot chest container, contents drop on death
+- [x] Custom rails: Steel Rail (1.5x) and Copper Rail (1.2x) with per-tier speed multipliers
+- [x] Custom 3x3 Train Workbench recipe type with output slot and ingredient consumption
+- [x] Bezier-curve track segments (`Curved Rail` block + `Track Layer` item)
+  - Two-click placement workflow with rail-tangent control points
+  - 3D Bezier supports rails at different y-values
+  - `BlockEntityRenderer` draws each segment as a textured strip following its sub-arc
+  - Sneak + right-click on a curved rail removes the entire curve
+- [x] 73+ recipe JSONs covering vanilla crafting, smelting, distillery, three assembly tiers, and the train workbench
+
+## Earlier Status: 5.0.0-alpha1 (Released)
 
 ### Completed Features (~95% parity with legacy 1.12.2)
 
