@@ -5,6 +5,13 @@ plugins {
     id 'idea'
 }
 
+repositories {
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+}
+
 version = project.modVersion
 group = 'traincraft'
 archivesBaseName = 'Traincraft'
@@ -39,4 +46,12 @@ idea {
     module {
         inheritOutputDirs = true
     }
+}
+
+// JEI Dependencies
+dependencies {
+    // compile against the JEI API but do not include it at runtime
+    compileOnly("mezz.jei:jei-1.21-neoforge-api:19.5.0.59")
+    // at runtime, use the full JEI jar for NeoForge
+    runtimeOnly("mezz.jei:jei-1.21-neoforge:19.5.0.59")
 }

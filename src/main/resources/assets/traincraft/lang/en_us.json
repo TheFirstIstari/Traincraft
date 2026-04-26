@@ -92,5 +92,8 @@
   "screen.traincraft.guide_book.category.blocks": "Blocks",
   "screen.traincraft.guide_book.category.items": "Items",
   "screen.traincraft.guide_book.category.entities": "Entities",
-  "screen.traincraft.guide_book.category.recipes": "Recipes"
+  "screen.traincraft.guide_book.category.recipes": "Recipes",
+  "gui.jei.category.assembly_table": "Assembly Table",
+  "gui.jei.category.distillery": "Distillery",
+  "gui.jei.category.train_workbench": "Train Workbench"
 }
