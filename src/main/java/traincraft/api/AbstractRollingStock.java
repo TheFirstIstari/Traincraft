@@ -63,6 +63,11 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         builder.define(DATA_RESTRICTION, 0);
     }
 
+    /** Desired separation between two coupled rolling stock entities, in blocks. */
+    public static final double COUPLING_DISTANCE = 1.6;
+    /** Spring stiffness applied per tick to correct coupling drift. Tune for stability. */
+    public static final double COUPLING_STIFFNESS = 0.3;
+
     @Override
     public void tick() {
         super.tick();
@@ -76,7 +81,64 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         LivingEntity controller = getControllingPassenger();
         if (controller != null) {
             applyCustomPhysics(controller);
+            // Push a status line to the driver every half-second so they can see fuel/water levels.
+            if (this.tickCount % 10 == 0 && controller instanceof Player p) {
+                net.minecraft.network.chat.Component status = statusForDriver();
+                if (status != null) {
+                    p.displayClientMessage(status, true);
+                }
+            }
         }
+
+        resolvePendingLinks();
+        applyCouplingPhysics();
+    }
+
+    /**
+     * Restore the next/previous link references from UUIDs persisted in NBT once both endpoints
+     * have been loaded by the level. Runs as part of the regular tick so the resolution defers
+     * naturally until both entities exist.
+     */
+    private void resolvePendingLinks() {
+        if (pendingNextUuid != null && this.level() instanceof net.minecraft.server.level.ServerLevel sl) {
+            net.minecraft.world.entity.Entity e = sl.getEntity(pendingNextUuid);
+            if (e instanceof AbstractRollingStock<?> rs) {
+                this.next = rs;
+                pendingNextUuid = null;
+            }
+        }
+        if (pendingPreviousUuid != null && this.level() instanceof net.minecraft.server.level.ServerLevel sl) {
+            net.minecraft.world.entity.Entity e = sl.getEntity(pendingPreviousUuid);
+            if (e instanceof AbstractRollingStock<?> rs) {
+                this.previous = rs;
+                pendingPreviousUuid = null;
+            }
+        }
+    }
+
+    /**
+     * Propagate motion between coupled rolling stock entities by applying a spring force toward
+     * the desired follow distance behind the leader. Each cart in a chain only handles its
+     * upstream neighbour (the one stored in {@link #previous}); the downstream neighbour will run
+     * the same logic in its own tick.
+     */
+    private void applyCouplingPhysics() {
+        AbstractRollingStock<?> leader = this.previous;
+        if (leader == null || leader.isRemoved() || leader.level() != this.level()) return;
+
+        // Don't couple if the leader is more than a few blocks away — the link is broken in practice.
+        Vec3 toLeader = leader.position().subtract(this.position());
+        double dist = toLeader.length();
+        if (dist < 1e-3 || dist > 6.0) return;
+
+        Vec3 dir = toLeader.normalize();
+        double error = dist - COUPLING_DISTANCE;
+
+        // Spring correction: positive error pulls follower toward leader; negative pushes apart.
+        // Apply mostly in the horizontal plane to preserve gravity behaviour.
+        Vec3 correction = new Vec3(dir.x, 0, dir.z).scale(error * COUPLING_STIFFNESS);
+        Vec3 motion = getDeltaMovement();
+        setDeltaMovement(motion.x + correction.x, motion.y, motion.z + correction.z);
     }
 
     private void applyCustomPhysics(LivingEntity controller) {
@@ -140,10 +202,17 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         writeToNBT(tag, SyncState.SAVE);
     }
 
+    @Nullable
+    private UUID pendingNextUuid;
+    @Nullable
+    private UUID pendingPreviousUuid;
+
     protected void readFromNBT(CompoundTag nbt, SyncState state) {
         if (nbt.hasUUID("owner")) {
             this.owner = nbt.getUUID("owner");
         }
+        if (nbt.hasUUID("link_next")) this.pendingNextUuid = nbt.getUUID("link_next");
+        if (nbt.hasUUID("link_previous")) this.pendingPreviousUuid = nbt.getUUID("link_previous");
         if (nbt.contains("name", 8)) {
             this.name = nbt.getString("name");
         }
@@ -173,6 +242,8 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         if (this.owner != null) {
             nbt.putUUID("owner", this.owner);
         }
+        if (this.next != null) nbt.putUUID("link_next", this.next.getUUID());
+        if (this.previous != null) nbt.putUUID("link_previous", this.previous.getUUID());
         if (this.name != null) {
             nbt.putString("name", this.name);
         }
@@ -249,6 +320,15 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
      */
     public boolean canApplyThrottle() {
         return true;
+    }
+
+    /**
+     * Status line shown above the driver's hotbar (e.g. fuel/water levels). Returning null
+     * suppresses the message for stock that has nothing meaningful to report.
+     */
+    @Nullable
+    public net.minecraft.network.chat.Component statusForDriver() {
+        return null;
     }
 
     @Override

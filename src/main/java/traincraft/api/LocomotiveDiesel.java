@@ -70,6 +70,14 @@ public abstract class LocomotiveDiesel<A extends LocomotiveDiesel<A>> extends Ab
     }
 
     @Override
+    public net.minecraft.network.chat.Component statusForDriver() {
+        int fuelPct = (int) (100.0 * this.fuelTank.getFluidAmount() / this.fuelTank.getCapacity());
+        return net.minecraft.network.chat.Component.literal(
+            String.format("Fuel: %d%% (%d mB)", fuelPct, this.fuelTank.getFluidAmount())
+        );
+    }
+
+    @Override
     public IItemHandler getInventory(@Nullable Direction side) {
         return this.inventory;
     }

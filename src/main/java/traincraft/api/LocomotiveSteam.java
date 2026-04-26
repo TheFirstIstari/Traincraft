@@ -96,6 +96,15 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
     }
 
     @Override
+    public net.minecraft.network.chat.Component statusForDriver() {
+        int waterPct = (int) (100.0 * this.waterTank.getFluidAmount() / this.waterTank.getCapacity());
+        int tempC = (int) (this.temperature - 273.15);
+        return net.minecraft.network.chat.Component.literal(
+            String.format("Steam: %d°C  Water: %d%%  Burn: %d", tempC, waterPct, this.burnTime)
+        );
+    }
+
+    @Override
     public IItemHandler getInventory(@Nullable Direction side) {
         return this.inventory;
     }
