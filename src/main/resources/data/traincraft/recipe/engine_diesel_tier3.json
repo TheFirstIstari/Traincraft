@@ -1,0 +1,34 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 3,
+  "result": {
+    "id": "traincraft:engine_diesel",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "traincraft:steel_ingot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:piston"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:cylinder"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:transmission"
+      },
+      "count": 1
+    }
+  ]
+}

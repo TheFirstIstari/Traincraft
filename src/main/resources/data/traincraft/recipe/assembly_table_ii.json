@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "SAS",
+    "III"
+  ],
+  "key": {
+    "S": {
+      "item": "traincraft:steel_ingot"
+    },
+    "A": {
+      "item": "traincraft:assembly_table_i"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "traincraft:assembly_table_ii",
+    "count": 1
+  }
+}

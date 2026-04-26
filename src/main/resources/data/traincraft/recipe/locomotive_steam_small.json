@@ -1,0 +1,36 @@
+{
+  "type": "traincraft:train_workbench",
+  "slots": [
+    {
+      "item": "traincraft:chimney_iron"
+    },
+    {
+      "item": "traincraft:boiler_iron"
+    },
+    {
+      "item": "traincraft:cab_iron"
+    },
+    {
+      "item": "traincraft:firebox_iron"
+    },
+    {
+      "item": "traincraft:engine_steam"
+    },
+    {
+      "item": "traincraft:controls"
+    },
+    {
+      "item": "traincraft:bogie_iron"
+    },
+    {
+      "item": "traincraft:frame_iron"
+    },
+    {
+      "item": "traincraft:bogie_iron"
+    }
+  ],
+  "result": {
+    "id": "traincraft:locomotive_steam_small_spawn_egg",
+    "count": 1
+  }
+}

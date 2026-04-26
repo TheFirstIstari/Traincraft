@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ID",
+    "DI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "traincraft:coal_dust"
+    }
+  },
+  "result": {
+    "id": "traincraft:steel_dust",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 2,
+  "result": {
+    "id": "traincraft:piston",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 2
+    }
+  ]
+}

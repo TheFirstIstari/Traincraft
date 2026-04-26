@@ -1,0 +1,22 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 1,
+  "result": {
+    "id": "traincraft:boiler_iron",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 6
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:steel_ingot"
+      },
+      "count": 2
+    }
+  ]
+}

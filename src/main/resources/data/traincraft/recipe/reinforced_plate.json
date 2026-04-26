@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "III",
+    "ISI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "traincraft:steel_ingot"
+    }
+  },
+  "result": {
+    "id": "traincraft:reinforced_plate",
+    "count": 2
+  }
+}

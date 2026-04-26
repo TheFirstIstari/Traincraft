@@ -1,0 +1,22 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 2,
+  "result": {
+    "id": "traincraft:bogie_iron",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:steel_ingot"
+      },
+      "count": 2
+    }
+  ]
+}

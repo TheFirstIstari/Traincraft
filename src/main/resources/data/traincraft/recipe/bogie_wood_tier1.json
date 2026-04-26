@@ -1,0 +1,22 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 1,
+  "result": {
+    "id": "traincraft:bogie_wood",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:oak_planks"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 2,
+  "result": {
+    "id": "traincraft:controls",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "traincraft:circuit"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:redstone"
+      },
+      "count": 1
+    }
+  ]
+}

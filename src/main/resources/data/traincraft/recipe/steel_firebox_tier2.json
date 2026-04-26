@@ -1,0 +1,22 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 2,
+  "result": {
+    "id": "traincraft:steel_firebox",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "traincraft:steel_ingot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:coal"
+      },
+      "count": 2
+    }
+  ]
+}

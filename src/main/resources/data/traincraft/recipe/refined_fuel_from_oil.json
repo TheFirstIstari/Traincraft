@@ -1,0 +1,16 @@
+{
+  "type": "traincraft:distillery",
+  "input": {
+    "item": "traincraft:oil_sand"
+  },
+  "input_amount": 1,
+  "output": {
+    "id": "traincraft:fuel",
+    "count": 1
+  },
+  "burn_time": 400,
+  "fluid_output": {
+    "id": "traincraft:refined_fuel",
+    "amount": 250
+  }
+}

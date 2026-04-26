@@ -1,0 +1,32 @@
+{
+  "type": "traincraft:train_workbench",
+  "slots": [
+    {
+      "item": "traincraft:cab_iron"
+    },
+    {
+      "item": "traincraft:seats"
+    },
+    {
+      "item": "traincraft:cab_iron"
+    },
+    {
+      "item": "traincraft:bogie_iron"
+    },
+    {
+      "item": "traincraft:frame_iron"
+    },
+    {
+      "item": "traincraft:bogie_iron"
+    },
+    [],
+    {
+      "item": "traincraft:steel_ingot"
+    },
+    []
+  ],
+  "result": {
+    "id": "traincraft:passenger_cart_spawn_egg",
+    "count": 1
+  }
+}

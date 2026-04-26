@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "traincraft:steel_dust"
+  },
+  "result": {
+    "id": "traincraft:steel_ingot"
+  },
+  "experience": 0.7,
+  "cookingtime": 200,
+  "category": "misc"
+}

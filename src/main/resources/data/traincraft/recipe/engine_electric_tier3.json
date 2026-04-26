@@ -1,0 +1,28 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 3,
+  "result": {
+    "id": "traincraft:engine_electric",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "traincraft:transformer"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:circuit"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:copper_ingot"
+      },
+      "count": 4
+    }
+  ]
+}

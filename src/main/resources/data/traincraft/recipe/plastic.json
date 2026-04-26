@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OO",
+    "OO"
+  ],
+  "key": {
+    "O": {
+      "item": "traincraft:oil_sand"
+    }
+  },
+  "result": {
+    "id": "traincraft:plastic",
+    "count": 1
+  }
+}

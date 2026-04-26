@@ -1,0 +1,28 @@
+{
+  "type": "traincraft:assembly_table",
+  "tier": 3,
+  "result": {
+    "id": "traincraft:transformer",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "traincraft:copper_ingot"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "traincraft:fine_copper_wire"
+      },
+      "count": 2
+    }
+  ]
+}
