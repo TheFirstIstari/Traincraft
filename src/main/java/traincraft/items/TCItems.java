@@ -82,8 +82,8 @@ public class TCItems {
     public static final DeferredHolder<Item, Item> FRAME_WOOD = registerSimpleItem("frame_wood");
     public static final DeferredHolder<Item, Item> PISTON = registerSimpleItem("piston");
     public static final DeferredHolder<Item, Item> PROPELLER = registerSimpleItem("propeller");
-    public static final DeferredHolder<Item, Item> RAIL_COPPER = registerSimpleItem("rail_copper");
-    public static final DeferredHolder<Item, Item> RAIL_STEEL = registerSimpleItem("rail_steel");
+    public static final DeferredHolder<Item, Item> RAIL_COPPER = registerBlockItem(TCBlocks.RAIL_COPPER);
+    public static final DeferredHolder<Item, Item> RAIL_STEEL = registerBlockItem(TCBlocks.RAIL_STEEL);
     public static final DeferredHolder<Item, Item> REINFORCED_PLATE = registerSimpleItem("reinforced_plate");
     public static final DeferredHolder<Item, Item> SEATS = registerSimpleItem("seats");
     public static final DeferredHolder<Item, Item> SIGNAL_PART = registerSimpleItem("signal_part");

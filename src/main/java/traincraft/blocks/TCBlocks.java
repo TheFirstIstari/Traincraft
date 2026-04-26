@@ -78,4 +78,12 @@ public class TCBlocks {
 
     public static final DeferredHolder<Block, BlockSwitchStand> SWITCH_STAND = BLOCKS.register("switch_stand",
         () -> new BlockSwitchStand(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(2.0f, 6.0f).noOcclusion()));
+
+    // Custom rails. The block id matches the historical "rail_steel" / "rail_copper" item ids
+    // so existing recipes continue to produce a placeable rail.
+    public static final DeferredHolder<Block, traincraft.blocks.rail.BlockTCRail> RAIL_STEEL = BLOCKS.register("rail_steel",
+        () -> new traincraft.blocks.rail.BlockTCRail(BlockBehaviour.Properties.ofFullCopy(Blocks.RAIL), 1.5));
+
+    public static final DeferredHolder<Block, traincraft.blocks.rail.BlockTCRail> RAIL_COPPER = BLOCKS.register("rail_copper",
+        () -> new traincraft.blocks.rail.BlockTCRail(BlockBehaviour.Properties.ofFullCopy(Blocks.RAIL), 1.2));
 }

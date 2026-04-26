@@ -63,6 +63,24 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         builder.define(DATA_RESTRICTION, 0);
     }
 
+    /**
+     * Returns the speed multiplier of the rail block the rolling stock is currently sitting on.
+     * Vanilla rails return 1.0; Traincraft rails return their configured multiplier.
+     */
+    private double getCurrentRailSpeedMultiplier() {
+        // BaseRailBlock places its rail state on the same level as the entity's blockPosition.
+        net.minecraft.world.level.block.state.BlockState state = this.level().getBlockState(this.blockPosition());
+        if (state.getBlock() instanceof traincraft.blocks.rail.BlockTCRail rail) {
+            return rail.getSpeedMultiplier();
+        }
+        // Some rails sit one block below the entity's bounding box origin.
+        net.minecraft.world.level.block.state.BlockState below = this.level().getBlockState(this.blockPosition().below());
+        if (below.getBlock() instanceof traincraft.blocks.rail.BlockTCRail rail) {
+            return rail.getSpeedMultiplier();
+        }
+        return 1.0;
+    }
+
     /** Desired separation between two coupled rolling stock entities, in blocks. */
     public static final double COUPLING_DISTANCE = 1.6;
     /** Spring stiffness applied per tick to correct coupling drift. Tune for stability. */
@@ -142,10 +160,12 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
     }
 
     private void applyCustomPhysics(LivingEntity controller) {
-        // All values are converted from blocks/sec into blocks/tick.
-        double maxSpeed = getMaxSpeed() / 20.0;
-        double maxReverse = getMaxReverseSpeed() / 20.0;
-        double accel = getAcceleration() / 400.0;       // gentler than per-tick raw acceleration
+        // Stock speed is in blocks/sec; convert to per-tick. Apply a rail-based bonus when the
+        // train is currently riding on one of our custom rail blocks.
+        double railBonus = getCurrentRailSpeedMultiplier();
+        double maxSpeed = getMaxSpeed() / 20.0 * railBonus;
+        double maxReverse = getMaxReverseSpeed() / 20.0 * railBonus;
+        double accel = getAcceleration() / 400.0 * railBonus;   // gentler than per-tick raw acceleration
         double brake = getBreakPower() / 20.0;
 
         Vec3 motion = getDeltaMovement();

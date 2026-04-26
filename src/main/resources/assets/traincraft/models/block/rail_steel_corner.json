@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/rail_curved",
+  "textures": {
+    "rail": "traincraft:block/rail_steel_corner"
+  }
+}
