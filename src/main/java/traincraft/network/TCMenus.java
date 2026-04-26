@@ -15,6 +15,7 @@ import traincraft.blocks.assemblytable.ContainerAssemblyTable;
 import traincraft.blocks.distillery.ContainerDistillery;
 import traincraft.blocks.openhearthfurnace.ContainerOpenHearthFurnace;
 import traincraft.blocks.trainworkbench.ContainerTrainWorkbench;
+import traincraft.gui.ContainerGuideBook;
 
 public class TCMenus {
 

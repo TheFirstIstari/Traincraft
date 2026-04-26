@@ -175,6 +175,10 @@ public class GuideBookScreen extends AbstractContainerScreen<ContainerGuideBook>
             guiGraphics.drawString(this.font, scrollText, leftPos + imageWidth - 50, topPos + imageHeight - 15, 0x3F3F3F, false);
         }
     }
+
+    @Override
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    }
     
     private void renderEntry(GuiGraphics guiGraphics, Entry entry, int x, int y) {
         // Render item icon
@@ -204,9 +208,9 @@ public class GuideBookScreen extends AbstractContainerScreen<ContainerGuideBook>
     }
     
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
         if (entries.size() > MAX_ENTRIES_PER_PAGE) {
-            scrollOffset = Math.max(0, Math.min(entries.size() - MAX_ENTRIES_PER_PAGE, scrollOffset - (int) Math.signum(delta)));
+            scrollOffset = Math.max(0, Math.min(entries.size() - MAX_ENTRIES_PER_PAGE, scrollOffset - (int) Math.signum(deltaY)));
         }
         return true;
     }
