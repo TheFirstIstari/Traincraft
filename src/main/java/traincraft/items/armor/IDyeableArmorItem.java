@@ -6,6 +6,7 @@
 package traincraft.items.armor;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -36,11 +37,14 @@ public interface IDyeableArmorItem {
      * @return the RGB color value, or DEFAULT_COLOR if not set
      */
     default int getColor(ItemStack stack) {
-        CompoundTag nbt = stack.getTag();
-        if (nbt != null && nbt.contains(COLOR_TAG, 10)) {
-            CompoundTag display = nbt.getCompound(COLOR_TAG);
-            if (display.contains(COLOR_KEY, 3)) {
-                return display.getInt(COLOR_KEY);
+        CustomData customData = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+        if (customData != null) {
+            CompoundTag nbt = customData.copyTag();
+            if (nbt.contains(COLOR_TAG, 10)) {
+                CompoundTag display = nbt.getCompound(COLOR_TAG);
+                if (display.contains(COLOR_KEY, 3)) {
+                    return display.getInt(COLOR_KEY);
+                }
             }
         }
         return DEFAULT_COLOR;
@@ -53,11 +57,12 @@ public interface IDyeableArmorItem {
      * @param color the RGB color value to set
      */
     default void setColor(ItemStack stack, int color) {
-        CompoundTag nbt = stack.getOrCreateTag();
+        CustomData customData = stack.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
+        CompoundTag nbt = customData != null ? customData.copyTag() : new CompoundTag();
         CompoundTag display = nbt.contains(COLOR_TAG, 10) ? nbt.getCompound(COLOR_TAG) : new CompoundTag();
         display.putInt(COLOR_KEY, color);
         nbt.put(COLOR_TAG, display);
-        stack.setTag(nbt);
+        stack.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, CustomData.of(nbt));
     }
 
     /**

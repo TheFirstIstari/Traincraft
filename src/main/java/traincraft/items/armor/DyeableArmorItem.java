@@ -5,13 +5,10 @@
 
 package traincraft.items.armor;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 /**
  * An armor item that can be dyed using dyes in the game.
@@ -21,18 +18,13 @@ import net.minecraft.world.level.Level;
 public class DyeableArmorItem extends ArmorItem implements IDyeableArmorItem {
 
     /**
-     * The texture suffix for the dyed/damaged version of the armor.
-     */
-    private static final String DYED_SUFFIX = "_dyed";
-
-    /**
      * Default constructor for creating a dyeable armor item.
      *
      * @param material the armor material
      * @param type    the armor type (helmet, chestplate, leggings, or boots)
      * @param properties item properties
      */
-    public DyeableArmorItem(ArmorMaterial material, Type type, Properties properties) {
+    public DyeableArmorItem(net.minecraft.core.Holder<ArmorMaterial> material, ArmorItem.Type type, Item.Properties properties) {
         super(material, type, properties);
     }
 
@@ -57,25 +49,10 @@ public class DyeableArmorItem extends ArmorItem implements IDyeableArmorItem {
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity) {
-        if (hasCustomColor(stack)) {
-            return super.getArmorTexture(stack, entity) + DYED_SUFFIX;
-        }
-        return super.getArmorTexture(stack, entity);
-    }
-
-    @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         // Use the default armor repair logic but also check for leather
         // for compatibility with vanilla dyeing
-        return super.isValidRepairItem(toRepair, repair) || 
-               (repair.getItem() instanceof DyeableLeatherItem);
-    }
-
-    @Override
-    public void onArmorTick(Level level, Player player, ItemStack stack) {
-        // Standard armor behavior, can be extended for custom logic
-        super.onArmorTick(level, player, stack);
+        return super.isValidRepairItem(toRepair, repair);
     }
 
     /**
@@ -98,7 +75,7 @@ public class DyeableArmorItem extends ArmorItem implements IDyeableArmorItem {
      * @param defaultColor the default color to apply
      * @return a new ItemStack with the default color set
      */
-    public static ItemStack createWithDefaultColor(ArmorMaterial material, Type type, 
+    public static ItemStack createWithDefaultColor(net.minecraft.core.Holder<ArmorMaterial> material, ArmorItem.Type type,
                                                     Item.Properties properties, int defaultColor) {
         DyeableArmorItem item = new DyeableArmorItem(material, type, properties);
         ItemStack stack = new ItemStack(item);
