@@ -64,6 +64,12 @@ public abstract class LocomotiveDiesel<A extends LocomotiveDiesel<A>> extends Ab
     }
 
     @Override
+    public boolean canApplyThrottle() {
+        // Engine is running while burnTime is ticking down, or it's ready to consume fuel from the tank.
+        return this.burnTime > 0 || this.fuelTank.getFluidAmount() > 0;
+    }
+
+    @Override
     public IItemHandler getInventory(@Nullable Direction side) {
         return this.inventory;
     }
@@ -86,6 +92,14 @@ public abstract class LocomotiveDiesel<A extends LocomotiveDiesel<A>> extends Ab
             } else if (this.fuelTank.getFluidAmount() > 0) {
                 this.fuelTank.drain(1, IFluidHandler.FluidAction.EXECUTE);
                 this.burnTime = BURN_TICKS_PER_MB;
+            }
+
+            // Periodically loop the engine sound while the loco is running.
+            if (this.burnTime > 0 && this.tickCount % 30 == 0) {
+                float volume = (float) Math.min(0.3 + speed * 0.5, 1.0);
+                this.level().playSound(null, getX(), getY(), getZ(),
+                    traincraft.TCSounds.LOCOMOTIVE_DIESEL_ENGINE.get(),
+                    net.minecraft.sounds.SoundSource.NEUTRAL, volume, 1.0f);
             }
         }
     }

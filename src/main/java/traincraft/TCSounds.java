@@ -37,4 +37,8 @@ public class TCSounds {
     // Signal sounds
     public static final DeferredHolder<SoundEvent, SoundEvent> SIGNAL_ACTIVATE = 
         SOUND_EVENTS.register("signal.activate", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "signal.activate")));
+
+    // Diesel locomotive engine sound (loops while moving).
+    public static final DeferredHolder<SoundEvent, SoundEvent> LOCOMOTIVE_DIESEL_ENGINE =
+        SOUND_EVENTS.register("locomotive.diesel.engine", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "locomotive.diesel.engine")));
 }

@@ -90,6 +90,12 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
     }
 
     @Override
+    public boolean canApplyThrottle() {
+        // Need a hot boiler (fuel actively burning or recently burned) and water in the tank.
+        return this.temperature > 373.15 && this.waterTank.getFluidAmount() > 0;
+    }
+
+    @Override
     public IItemHandler getInventory(@Nullable Direction side) {
         return this.inventory;
     }

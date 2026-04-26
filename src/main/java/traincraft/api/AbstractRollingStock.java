@@ -89,6 +89,11 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         Vec3 motion = getDeltaMovement();
         // Throttle input: positive forward (W), negative reverse (S).
         float throttle = controller.zza;
+        // Reject acceleration if the rolling stock has its own fuel/power model and is currently dry.
+        // Braking and friction still apply so a runaway cart can be stopped without fuel.
+        if (throttle != 0f && !canApplyThrottle()) {
+            throttle = 0f;
+        }
         // Strafing (A/D) is reserved for switching/horn etc.; ignore for now.
 
         // Determine the train's forward direction in world-space using the controller yaw,
@@ -237,6 +242,15 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
             .orElse(null);
     }
 
+    /**
+     * Whether this rolling stock currently has the fuel/power required to accelerate.
+     * Default rolling stock without an internal fuel model (carts, bogies) always returns true,
+     * so they coast freely when pushed by a powered locomotive.
+     */
+    public boolean canApplyThrottle() {
+        return true;
+    }
+
     @Override
     public double getAcceleration() {
         return 0.0;
@@ -283,6 +297,11 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
 
     @Override
     public boolean handlePlayerClickWithItem(Player player, InteractionHand hand, ItemStack stack, Vec3 hitVector) {
+        // Common interaction: a connector item links two rolling stock entities together.
+        if (stack.getItem() instanceof traincraft.items.ItemConnector) {
+            traincraft.items.ItemConnector.handleEntityClick(this, player, hand, stack);
+            return true;
+        }
         return false;
     }
 

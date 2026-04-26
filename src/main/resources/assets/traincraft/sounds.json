@@ -46,5 +46,13 @@
         "stream": false
       }
     ]
+  },
+  "locomotive.diesel.engine": {
+    "sounds": [
+      {
+        "name": "traincraft:locomotive/diesel/engine",
+        "stream": true
+      }
+    ]
   }
 }
