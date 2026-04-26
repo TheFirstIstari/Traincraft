@@ -27,6 +27,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import traincraft.TCSounds;
+import traincraft.recipe.DistilleryRecipe;
 
 public class TileDistillery extends BlockEntity implements MenuProvider {
 

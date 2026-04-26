@@ -6,7 +6,6 @@
 package traincraft.blocks.switchstand;
 
 import com.mojang.serialization.MapCodec;
-import javax.annotation.Nullable;
 import traincraft.tile.TCTiles;
 import traincraft.tile.TileSwitchStand;
 import net.minecraft.world.level.block.entity.BlockEntityType;

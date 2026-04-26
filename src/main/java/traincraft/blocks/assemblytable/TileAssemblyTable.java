@@ -7,19 +7,21 @@ package traincraft.blocks.assemblytable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompTag;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import traincraft.TCSounds;
 import traincraft.recipe.AssemblyTableRecipe;
+import traincraft.blocks.TCBlocks;
 import traincraft.tile.TCTiles;
 
 public class TileAssemblyTable extends BlockEntity implements MenuProvider {
@@ -51,7 +53,17 @@ public class TileAssemblyTable extends BlockEntity implements MenuProvider {
     private AssemblyTableRecipe currentRecipe;
 
     public TileAssemblyTable(BlockPos pos, BlockState state) {
-        super(TCTiles.ASSEMBLY_TABLE_I.get(), pos, state);
+        super(resolveType(state), pos, state);
+    }
+
+    private static BlockEntityType<?> resolveType(BlockState state) {
+        if (state.getBlock() == TCBlocks.ASSEMBLY_TABLE_II.get()) {
+            return TCTiles.ASSEMBLY_TABLE_II.get();
+        }
+        if (state.getBlock() == TCBlocks.ASSEMBLY_TABLE_III.get()) {
+            return TCTiles.ASSEMBLY_TABLE_III.get();
+        }
+        return TCTiles.ASSEMBLY_TABLE_I.get();
     }
 
     public int getTier() {

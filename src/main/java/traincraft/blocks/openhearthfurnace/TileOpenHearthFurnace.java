@@ -71,16 +71,7 @@ public class TileOpenHearthFurnace extends BlockEntity implements MenuProvider {
 
         if (entity.burnTime > 0) {
             entity.burnTime--;
-        }
-
-        if (entity.cookTime > 0) {
-            entity.cookTime++;
-            if (entity.cookTime >= entity.maxCookTime) {
-                entity.cookTime = 0;
-                entity.maxCookTime = 200;
-                entity.craftItem();
-                dirty = true;
-            }
+            dirty = true;
         }
 
         if (entity.burnTime <= 0) {
@@ -103,10 +94,13 @@ public class TileOpenHearthFurnace extends BlockEntity implements MenuProvider {
                 entity.cookTime = 0;
                 entity.maxCookTime = 200;
                 entity.craftItem();
+            }
+            dirty = true;
+        } else {
+            if (entity.cookTime != 0) {
+                entity.cookTime = 0;
                 dirty = true;
             }
-        } else {
-            entity.cookTime = 0;
         }
 
         boolean wasActive = state.getValue(BlockOpenHearthFurnace.ACTIVE);
