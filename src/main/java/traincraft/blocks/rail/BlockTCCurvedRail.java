@@ -7,6 +7,7 @@ package traincraft.blocks.rail;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.EntityBlock;
@@ -46,5 +47,22 @@ public class BlockTCCurvedRail extends RailBlock implements EntityBlock {
     public static TileTCCurvedRail getTile(BlockGetter level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         return be instanceof TileTCCurvedRail tile ? tile : null;
+    }
+
+    /**
+     * Curved rails are part of a contiguous track that may travel through midair on slopes/bridges,
+     * so we relax the vanilla "must have a block below" survival rule. The track-layer item already
+     * verifies that the path doesn't cross unreplaceable terrain at placement time.
+     */
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    protected net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
+        // Default block model is hidden; the curved-rail block-entity renderer draws each
+        // segment along its own Bezier sub-arc.
+        return net.minecraft.world.level.block.RenderShape.INVISIBLE;
     }
 }

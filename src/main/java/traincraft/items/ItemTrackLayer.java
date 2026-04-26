@@ -70,6 +70,16 @@ public class ItemTrackLayer extends Item {
         }
 
         ItemStack stack = context.getItemInHand();
+
+        // Sneak + right-click on a curved rail removes every block belonging to that curve.
+        if (player.isShiftKeyDown() && state.getBlock() instanceof traincraft.blocks.rail.BlockTCCurvedRail) {
+            if (!level.isClientSide) {
+                int removed = removeCurve(level, pos);
+                player.displayClientMessage(Component.literal("Removed " + removed + " curve segments."), true);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+
         Direction startDir = railDirection(state);
 
         if (!hasStart(stack)) {
@@ -128,6 +138,10 @@ public class ItemTrackLayer extends Item {
 
         Vec3 d0 = direction(startDir);
         Vec3 d1 = direction(endDir.getOpposite());
+        // Handles stay horizontal (the rail tangent has no vertical component) but their y is
+        // anchored to each endpoint so the curve interpolates smoothly between rails at different
+        // heights — the cubic Bezier blend functions naturally produce a vertical S that respects
+        // both endpoints' altitudes without bowing above or below them.
         Vec3 p1 = p0.add(d0.scale(handle));
         Vec3 p2 = p3.add(d1.scale(handle));
 
@@ -175,6 +189,44 @@ public class ItemTrackLayer extends Item {
             placedCount++;
         }
         return placedCount;
+    }
+
+    /**
+     * Walk the AABB of the curve attached to the clicked tile and remove every curved-rail block
+     * that shares its curveId. Returns the number of blocks removed.
+     */
+    private int removeCurve(Level level, BlockPos clicked) {
+        traincraft.blocks.rail.TileTCCurvedRail tile = traincraft.blocks.rail.BlockTCCurvedRail.getTile(level, clicked);
+        if (tile == null || tile.getCurveId() == null || tile.getCurve() == null) return 0;
+        UUID curveId = tile.getCurveId();
+        CurveData curve = tile.getCurve();
+
+        // Conservative bounding box: take the AABB of the four control points and pad by 2 blocks.
+        Vec3 p0 = curve.p0(), p1 = curve.p1(), p2 = curve.p2(), p3 = curve.p3();
+        int minX = (int) Math.floor(Math.min(Math.min(p0.x, p1.x), Math.min(p2.x, p3.x))) - 2;
+        int minY = (int) Math.floor(Math.min(Math.min(p0.y, p1.y), Math.min(p2.y, p3.y))) - 2;
+        int minZ = (int) Math.floor(Math.min(Math.min(p0.z, p1.z), Math.min(p2.z, p3.z))) - 2;
+        int maxX = (int) Math.ceil(Math.max(Math.max(p0.x, p1.x), Math.max(p2.x, p3.x))) + 2;
+        int maxY = (int) Math.ceil(Math.max(Math.max(p0.y, p1.y), Math.max(p2.y, p3.y))) + 2;
+        int maxZ = (int) Math.ceil(Math.max(Math.max(p0.z, p1.z), Math.max(p2.z, p3.z))) + 2;
+
+        int removed = 0;
+        BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    cursor.set(x, y, z);
+                    BlockState s = level.getBlockState(cursor);
+                    if (!(s.getBlock() instanceof traincraft.blocks.rail.BlockTCCurvedRail)) continue;
+                    traincraft.blocks.rail.TileTCCurvedRail t =
+                        traincraft.blocks.rail.BlockTCCurvedRail.getTile(level, cursor);
+                    if (t == null || !curveId.equals(t.getCurveId())) continue;
+                    level.setBlock(cursor, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+                    removed++;
+                }
+            }
+        }
+        return removed;
     }
 
     private static Direction railDirection(BlockState state) {

@@ -88,5 +88,7 @@ public class Traincraft {
         event.registerEntityRenderer(TCEntities.FREIGHT_CART.get(), EntityFreightCartRenderer::new);
         event.registerEntityRenderer(TCEntities.PASSENGER_CART.get(), EntityPassengerCartRenderer::new);
         event.registerEntityRenderer(TCEntities.BOGIE.get(), EntityBogieRenderer::new);
+        event.registerBlockEntityRenderer(traincraft.tile.TCTiles.CURVED_RAIL.get(),
+            traincraft.renderer.TileTCCurvedRailRenderer::new);
     }
 }
