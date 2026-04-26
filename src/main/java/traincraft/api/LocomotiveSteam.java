@@ -123,12 +123,12 @@ public abstract class LocomotiveSteam<A extends LocomotiveSteam<A>> extends Abst
         }
 
         // Play engine sound when the locomotive is moving
-        if (this.getDeltaMovement().length() > 0.01) {
-            // Play engine sound at a volume based on speed
+        if (this.getDeltaMovement().length() > 0.01 && this.tickCount % 30 == 0) {
+            // Throttle the engine loop to once every ~1.5s so we don't queue 20 events/second.
             double speed = this.getDeltaMovement().horizontalDistance();
             float volume = (float) Math.min(0.3 + (speed * 0.5), 1.0);
-            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), 
-                traincraft.TCSounds.LOCOMOTIVE_STEAM_ENGINE.get(), SoundSource.NEUTRAL, 
+            this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                traincraft.TCSounds.LOCOMOTIVE_STEAM_ENGINE.get(), SoundSource.NEUTRAL,
                 volume, 1.0f);
         }
 

@@ -134,6 +134,11 @@ public class ItemTrackLayer extends Item {
         // Control points are pushed along the rail tangent at each end. The handle distance is a
         // third of the chord length so the curve is gentle and doesn't overshoot wildly.
         double chord = p0.distanceTo(p3);
+        if (chord < 3.0) {
+            player.displayClientMessage(Component.literal(
+                "Endpoints are too close (need at least 3 blocks apart). Place rails further out and try again."), true);
+            return 0;
+        }
         double handle = Math.max(2.0, chord / 3.0);
 
         Vec3 d0 = direction(startDir);

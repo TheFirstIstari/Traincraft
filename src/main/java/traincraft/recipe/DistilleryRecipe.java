@@ -84,7 +84,11 @@ public class DistilleryRecipe implements Recipe<RecipeInput> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.of(this.input);
+        // NonNullList.of(default, vararg...) creates a populated list; NonNullList.of(default) alone
+        // creates an empty list, which JEI then crashes on with index-out-of-bounds. Be explicit.
+        NonNullList<Ingredient> list = NonNullList.create();
+        list.add(this.input);
+        return list;
     }
 
     public static class Type implements RecipeType<DistilleryRecipe> {

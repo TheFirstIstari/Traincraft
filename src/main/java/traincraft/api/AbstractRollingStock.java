@@ -135,8 +135,11 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         if (forwardSpeed < -maxStep) forwardSpeed = -maxStep;
 
         // Advance the parameter by (forwardSpeed / |tangent|) to keep block-space units consistent.
+        // Clamp to [0,1] so the cart cleanly stops at the curve endpoints; the next tick will
+        // either keep advancing (if it's still on the same curve), or vanilla moveAlongTrack
+        // takes over once the cart leaves the curved-rail block.
         double dt = forwardSpeed / tangentLen;
-        double tNext = tCur + dt;
+        double tNext = Math.max(0.0, Math.min(1.0, tCur + dt));
         Vec3 nextPos = curve.evaluate(tNext);
 
         // Snap onto the curve, then set motion to point along the new tangent so vanilla collision
@@ -214,7 +217,7 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
      */
     private void applyCouplingPhysics() {
         AbstractRollingStock<?> leader = this.previous;
-        if (leader == null || leader.isRemoved() || leader.level() != this.level()) return;
+        if (leader == null || leader.isRemoved() || !leader.isAlive() || leader.level() != this.level()) return;
 
         // Don't couple if the leader is more than a few blocks away — the link is broken in practice.
         Vec3 toLeader = leader.position().subtract(this.position());
