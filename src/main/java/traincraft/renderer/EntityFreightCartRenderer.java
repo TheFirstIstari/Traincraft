@@ -15,7 +15,7 @@ import traincraft.entity.rollingstock.EntityFreightCart;
 
 public class EntityFreightCartRenderer extends EntityRenderer<EntityFreightCart> {
 
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/trains/freightCartUS.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/trains/freight_cart_us.png");
 
     public EntityFreightCartRenderer(EntityRendererProvider.Context context) {
         super(context);

@@ -15,7 +15,7 @@ import traincraft.entity.rollingstock.EntityPassengerCart;
 
 public class EntityPassengerCartRenderer extends EntityRenderer<EntityPassengerCart> {
 
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/trains/passengerBlue.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/trains/passenger_blue.png");
 
     public EntityPassengerCartRenderer(EntityRendererProvider.Context context) {
         super(context);

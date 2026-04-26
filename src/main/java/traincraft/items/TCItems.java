@@ -86,7 +86,7 @@ public class TCItems {
     public static final DeferredHolder<Item, Item> RAIL_STEEL = registerSimpleItem("rail_steel");
     public static final DeferredHolder<Item, Item> REINFORCED_PLATE = registerSimpleItem("reinforced_plate");
     public static final DeferredHolder<Item, Item> SEATS = registerSimpleItem("seats");
-    public static final DeferredHolder<Item, Item> SIGNAL = registerSimpleItem("signal");
+    public static final DeferredHolder<Item, Item> SIGNAL_PART = registerSimpleItem("signal_part");
     public static final DeferredHolder<Item, Item> TRANSFORMER = registerSimpleItem("transformer");
     public static final DeferredHolder<Item, Item> TRANSMISSION = registerSimpleItem("transmission");
     public static final DeferredHolder<Item, Item> FINE_COPPER_WIRE = registerSimpleItem("fine_copper_wire");

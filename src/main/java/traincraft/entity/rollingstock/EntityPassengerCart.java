@@ -57,11 +57,9 @@ public class EntityPassengerCart extends AbstractRollingStock<EntityPassengerCar
 
     @Override
     public void linkToAnotherRollingStock(AbstractRollingStock<?> other, net.minecraft.world.entity.player.Player linker) {
-        if (this.next == null && other != this) {
-            this.next = other;
-            if (other.getPrevious() == null) {
-                other.linkToAnotherRollingStock(this, linker);
-            }
+        if (this.next == null && other != this && other.getPrevious() == null) {
+            this.setNextRollingStock(other);
+            other.setPreviousRollingStock(this);
         }
     }
 

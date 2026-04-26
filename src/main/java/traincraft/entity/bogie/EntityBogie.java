@@ -7,6 +7,8 @@ package traincraft.entity.bogie;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import traincraft.api.AbstractRollingStock;
@@ -148,5 +150,10 @@ public class EntityBogie extends AbstractRollingStock<EntityBogie> {
     @Override
     public void linkToAnotherRollingStock(AbstractRollingStock<?> other, net.minecraft.world.entity.player.Player linker) {
         // Bogies can't be linked to other rolling stock
+    }
+
+    @Override
+    public Item getDropItem() {
+        return Items.MINECART;
     }
 }

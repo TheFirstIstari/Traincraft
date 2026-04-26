@@ -176,8 +176,10 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
         if (!player.isShiftKeyDown()) {
             for (PassengerSeat seat : this.seats) {
                 if (seat.isFree()) {
-                    player.startRiding(this);
-                    return InteractionResult.SUCCESS;
+                    if (player.startRiding(this)) {
+                        seat.setCurrentUser(player);
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
         }
@@ -264,12 +266,15 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
     }
 
     public void registerSkins(Map<String, net.minecraft.resources.ResourceLocation> skinMap) {
+        this.skins.putAll(skinMap);
     }
 
     public void registerSeats(List<PassengerSeat> seatList) {
+        this.seats.addAll(seatList);
     }
 
     public void addAxes(List<Vec3> axisList) {
+        this.axes.addAll(axisList);
     }
 
     @Nullable
@@ -340,6 +345,14 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
     @Nullable
     public AbstractRollingStock<?> getPrevious() {
         return this.previous;
+    }
+
+    public void setNextRollingStock(@Nullable AbstractRollingStock<?> next) {
+        this.next = next;
+    }
+
+    public void setPreviousRollingStock(@Nullable AbstractRollingStock<?> previous) {
+        this.previous = previous;
     }
 
     public List<Vec3> getAxes() {
