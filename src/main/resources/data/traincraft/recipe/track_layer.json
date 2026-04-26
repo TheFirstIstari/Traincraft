@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RR",
+    "RW",
+    " S"
+  ],
+  "key": {
+    "R": {"item": "traincraft:rail_steel"},
+    "W": {"item": "traincraft:wrench"},
+    "S": {"item": "minecraft:stick"}
+  },
+  "result": {
+    "id": "traincraft:track_layer",
+    "count": 1
+  }
+}

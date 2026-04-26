@@ -86,4 +86,8 @@ public class TCBlocks {
 
     public static final DeferredHolder<Block, traincraft.blocks.rail.BlockTCRail> RAIL_COPPER = BLOCKS.register("rail_copper",
         () -> new traincraft.blocks.rail.BlockTCRail(BlockBehaviour.Properties.ofFullCopy(Blocks.RAIL), 1.2));
+
+    /** Curved rail block; one per cell along a Bezier track segment. */
+    public static final DeferredHolder<Block, traincraft.blocks.rail.BlockTCCurvedRail> CURVED_RAIL = BLOCKS.register("curved_rail",
+        () -> new traincraft.blocks.rail.BlockTCCurvedRail(BlockBehaviour.Properties.ofFullCopy(Blocks.RAIL), 1.5));
 }

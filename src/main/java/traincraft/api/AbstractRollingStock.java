@@ -70,15 +70,87 @@ public abstract class AbstractRollingStock<A extends AbstractRollingStock<A>> ex
     private double getCurrentRailSpeedMultiplier() {
         // BaseRailBlock places its rail state on the same level as the entity's blockPosition.
         net.minecraft.world.level.block.state.BlockState state = this.level().getBlockState(this.blockPosition());
+        if (state.getBlock() instanceof traincraft.blocks.rail.BlockTCCurvedRail curved) {
+            return curved.getSpeedMultiplier();
+        }
         if (state.getBlock() instanceof traincraft.blocks.rail.BlockTCRail rail) {
             return rail.getSpeedMultiplier();
         }
         // Some rails sit one block below the entity's bounding box origin.
         net.minecraft.world.level.block.state.BlockState below = this.level().getBlockState(this.blockPosition().below());
+        if (below.getBlock() instanceof traincraft.blocks.rail.BlockTCCurvedRail curved) {
+            return curved.getSpeedMultiplier();
+        }
         if (below.getBlock() instanceof traincraft.blocks.rail.BlockTCRail rail) {
             return rail.getSpeedMultiplier();
         }
         return 1.0;
+    }
+
+    /**
+     * Override vanilla rail-shape constraint so the cart follows our cubic-Bezier curves smoothly.
+     * Falls through to the vanilla {@code moveAlongTrack} for any non-curved rail.
+     */
+    @Override
+    protected void moveAlongTrack(net.minecraft.core.BlockPos pos,
+                                  net.minecraft.world.level.block.state.BlockState state) {
+        if (state.getBlock() instanceof traincraft.blocks.rail.BlockTCCurvedRail) {
+            traincraft.blocks.rail.TileTCCurvedRail tile = traincraft.blocks.rail.BlockTCCurvedRail.getTile(this.level(), pos);
+            if (tile != null && tile.getCurve() != null) {
+                followCurve(tile);
+                return;
+            }
+        }
+        super.moveAlongTrack(pos, state);
+    }
+
+    /**
+     * Project the cart onto the curve at the current closest parameter, advance it along the
+     * curve by the cart's current scalar speed, and re-orient it to match the curve tangent.
+     */
+    private void followCurve(traincraft.blocks.rail.TileTCCurvedRail tile) {
+        traincraft.curves.CurveData curve = tile.getCurve();
+        if (curve == null) return;
+
+        Vec3 here = this.position();
+        double tCur = curve.closestT(here);
+        Vec3 onCurve = curve.evaluate(tCur);
+        Vec3 tangent = curve.tangent(tCur);
+        double tangentLen = tangent.length();
+        if (tangentLen < 1e-6) return;
+        Vec3 tangentDir = tangent.scale(1.0 / tangentLen);
+
+        // Forward speed is the projection of current motion onto the curve tangent. Sign indicates
+        // whether the cart is moving with (+) or against (-) the curve's parameter direction.
+        Vec3 motion = this.getDeltaMovement();
+        double forwardSpeed = motion.x * tangentDir.x + motion.z * tangentDir.z;
+
+        // Apply natural slowdown like vanilla rails so unpowered carts don't run forever.
+        forwardSpeed *= 0.99;
+        if (Math.abs(forwardSpeed) < 1e-3) forwardSpeed = 0;
+
+        // Cap to vanilla rail speed limit (8 m/s) so curves don't let trains break the world.
+        double maxStep = 0.4;
+        if (forwardSpeed > maxStep) forwardSpeed = maxStep;
+        if (forwardSpeed < -maxStep) forwardSpeed = -maxStep;
+
+        // Advance the parameter by (forwardSpeed / |tangent|) to keep block-space units consistent.
+        double dt = forwardSpeed / tangentLen;
+        double tNext = tCur + dt;
+        Vec3 nextPos = curve.evaluate(tNext);
+
+        // Snap onto the curve, then set motion to point along the new tangent so vanilla collision
+        // continues to work after this frame.
+        this.setPos(onCurve.x, onCurve.y, onCurve.z);
+        Vec3 nextTangent = curve.tangent(tNext);
+        if (nextTangent.lengthSqr() > 1e-9) {
+            Vec3 step = nextPos.subtract(onCurve);
+            this.setDeltaMovement(step.x, motion.y, step.z);
+            // Update yaw so the model and rendering line up with the curve direction.
+            float yaw = (float) (Math.atan2(-nextTangent.x, nextTangent.z) * 180.0 / Math.PI);
+            this.setYRot(yaw);
+            this.yRotO = yaw;
+        }
     }
 
     /** Desired separation between two coupled rolling stock entities, in blocks. */

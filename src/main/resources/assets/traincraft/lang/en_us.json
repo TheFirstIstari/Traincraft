@@ -107,6 +107,8 @@
   "item.traincraft.passenger_cart_spawn_egg": "Passenger Cart Spawn Egg",
   "block.traincraft.rail_steel": "Steel Rail",
   "block.traincraft.rail_copper": "Copper Rail",
+  "block.traincraft.curved_rail": "Curved Rail",
+  "item.traincraft.track_layer": "Track Layer",
   "item.traincraft.canister.empty": "Empty",
   "item.traincraft.canister.emptied": "Canister emptied.",
   "item.traincraft.canister.hint": "Right-click a fluid source to fill, sneak + right-click to empty"

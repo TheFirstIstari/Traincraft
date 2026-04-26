@@ -103,6 +103,8 @@ public class TCItems {
         () -> new ItemGuide());
     public static final DeferredHolder<Item, Item> CHUNK_LOADER_ACTIVATOR = ITEMS.register("chunk_loader_activator",
         () -> new ItemChunkLoaderActivator());
+    public static final DeferredHolder<Item, Item> TRACK_LAYER = ITEMS.register("track_layer",
+        () -> new ItemTrackLayer());
     public static final DeferredHolder<Item, Item> FUEL = registerSimpleItem("fuel");
     public static final DeferredHolder<Item, Item> ATO_CARD = ITEMS.register("ato_card",
         () -> new ItemATOCard());

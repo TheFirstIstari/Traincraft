@@ -69,4 +69,6 @@ public class TCTiles {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileSwitchStand>> SWITCH_STAND = TILES.register("switch_stand",
         () -> BlockEntityType.Builder.of(TileSwitchStand::new, TCBlocks.SWITCH_STAND.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<traincraft.blocks.rail.TileTCCurvedRail>> CURVED_RAIL = TILES.register("curved_rail",
+        () -> BlockEntityType.Builder.of(traincraft.blocks.rail.TileTCCurvedRail::new, TCBlocks.CURVED_RAIL.get()).build(null));
 }
