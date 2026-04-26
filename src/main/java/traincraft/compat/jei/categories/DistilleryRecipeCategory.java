@@ -21,8 +21,8 @@ import traincraft.recipe.DistilleryRecipe;
 
 public class DistilleryRecipeCategory implements IRecipeCategory<DistilleryRecipe> {
     
-    public static final ResourceLocation UID = new ResourceLocation(Traincraft.MOD_ID, "distillery");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Traincraft.MOD_ID, "textures/gui/distillery_jei.png");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "distillery");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/gui/distillery_jei.png");
     public static final RecipeType<DistilleryRecipe> TYPE = new RecipeType<>(UID, DistilleryRecipe.class);
     
     private final IDrawable background;

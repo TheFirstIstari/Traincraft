@@ -5,7 +5,7 @@
 package traincraft.compat.jei;
 
 import mezz.jei.api.IModPlugin;
-import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -13,7 +13,6 @@ import mezz.jei.api.constants.VanillaTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.crafting.RecipeType;
 import traincraft.Traincraft;
 import traincraft.blocks.TCBlocks;
 import traincraft.recipe.AssemblyTableRecipe;
@@ -25,14 +24,14 @@ import traincraft.compat.jei.categories.TrainWorkbenchRecipeCategory;
 import java.util.List;
 import java.util.ArrayList;
 
-@JEIPlugin
+@JeiPlugin
 public class TraincraftJEIPlugin implements IModPlugin {
     
     public static final String MOD_ID = "traincraft";
     
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(MOD_ID, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, "jei_plugin");
     }
     
     @Override
@@ -50,14 +49,14 @@ public class TraincraftJEIPlugin implements IModPlugin {
         List<AssemblyTableRecipe> assemblyRecipes = new ArrayList<>();
         Minecraft.getInstance().level.getRecipeManager()
             .getAllRecipesFor(AssemblyTableRecipe.Type.INSTANCE)
-            .forEach(recipe -> assemblyRecipes.add((AssemblyTableRecipe) recipe));
+            .forEach(recipe -> assemblyRecipes.add(recipe.value()));
         registration.addRecipes(AssemblyTableRecipeCategory.TYPE, assemblyRecipes);
         
         // Register distillery recipes
         List<DistilleryRecipe> distilleryRecipes = new ArrayList<>();
         Minecraft.getInstance().level.getRecipeManager()
             .getAllRecipesFor(DistilleryRecipe.Type.INSTANCE)
-            .forEach(recipe -> distilleryRecipes.add((DistilleryRecipe) recipe));
+            .forEach(recipe -> distilleryRecipes.add(recipe.value()));
         registration.addRecipes(DistilleryRecipeCategory.TYPE, distilleryRecipes);
         
         // For train workbench, we'll need to handle vanilla crafting recipes

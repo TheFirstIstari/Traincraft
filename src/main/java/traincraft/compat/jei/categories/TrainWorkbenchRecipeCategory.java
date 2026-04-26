@@ -16,14 +16,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import traincraft.Traincraft;
 import traincraft.blocks.TCBlocks;
 
 public class TrainWorkbenchRecipeCategory implements IRecipeCategory<CraftingRecipe> {
     
-    public static final ResourceLocation UID = new ResourceLocation(Traincraft.MOD_ID, "train_workbench");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Traincraft.MOD_ID, "textures/gui/train_workbench_jei.png");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "train_workbench");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/gui/train_workbench_jei.png");
     public static final RecipeType<CraftingRecipe> TYPE = new RecipeType<>(UID, CraftingRecipe.class);
     
     private final IDrawable background;

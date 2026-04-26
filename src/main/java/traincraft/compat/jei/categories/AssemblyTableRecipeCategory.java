@@ -22,8 +22,8 @@ import traincraft.recipe.NumberedIngredient;
 
 public class AssemblyTableRecipeCategory implements IRecipeCategory<AssemblyTableRecipe> {
     
-    public static final ResourceLocation UID = new ResourceLocation(Traincraft.MOD_ID, "assembly_table");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Traincraft.MOD_ID, "textures/gui/assembly_table_jei.png");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "assembly_table");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Traincraft.MOD_ID, "textures/gui/assembly_table_jei.png");
     public static final RecipeType<AssemblyTableRecipe> TYPE = new RecipeType<>(UID, AssemblyTableRecipe.class);
     
     private final IDrawable background;
@@ -74,7 +74,7 @@ public class AssemblyTableRecipeCategory implements IRecipeCategory<AssemblyTabl
             if (!ingredient.ingredient().isEmpty()) {
                 builder.addSlot(RecipeIngredientRole.INPUT, 8 + (i % 6) * 18, 8 + (i / 6) * 18)
                     .addIngredients(ingredient.ingredient())
-                    .addRichTooltipCallback((recipeSlotView, tooltip) -> {
+                    .addTooltipCallback((recipeSlotView, tooltip) -> {
                         if (ingredient.count() > 1) {
                             tooltip.add(Component.literal(ingredient.count() + "x"));
                         }

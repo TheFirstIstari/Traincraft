@@ -7,6 +7,7 @@ package traincraft.recipe;
 
 import com.mojang.serialization.Codec;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -41,7 +42,7 @@ public record NumberedIngredient(Ingredient ingredient, int count) {
 
     public com.google.gson.JsonObject toJsonObject() {
         com.google.gson.JsonObject json = new com.google.gson.JsonObject();
-        json.add("ingredient", ingredient.toJson());
+        json.add("ingredient", Ingredient.CODEC.encodeStart(JsonOps.INSTANCE, ingredient).getOrThrow());
         json.addProperty("count", count);
         return json;
     }
