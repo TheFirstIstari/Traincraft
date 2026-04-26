@@ -84,6 +84,7 @@ public class Traincraft {
 
     private void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(TCEntities.LOCOMOTIVE_STEAM_SMALL.get(), LocomotiveSteamSmallRenderer::new);
+        event.registerEntityRenderer(TCEntities.LOCOMOTIVE_DIESEL_SMALL.get(), traincraft.renderer.LocomotiveDieselSmallRenderer::new);
         event.registerEntityRenderer(TCEntities.FREIGHT_CART.get(), EntityFreightCartRenderer::new);
         event.registerEntityRenderer(TCEntities.PASSENGER_CART.get(), EntityPassengerCartRenderer::new);
         event.registerEntityRenderer(TCEntities.BOGIE.get(), EntityBogieRenderer::new);

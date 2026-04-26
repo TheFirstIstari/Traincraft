@@ -16,6 +16,7 @@ import traincraft.entity.rollingstock.EntityFreightCart;
 import traincraft.entity.rollingstock.EntityPassengerCart;
 import traincraft.entity.bogie.EntityBogie;
 import traincraft.entity.LocomotiveSteamSmall;
+import traincraft.entity.LocomotiveDieselSmall;
 
 public class TCEntities {
 
@@ -44,4 +45,10 @@ public class TCEntities {
             .sized(0.98f, 0.98f)
             .clientTrackingRange(10)
             .build("passenger_cart"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<LocomotiveDieselSmall>> LOCOMOTIVE_DIESEL_SMALL = ENTITIES.register("locomotive_diesel_small",
+        () -> EntityType.Builder.of(LocomotiveDieselSmall::new, MobCategory.MISC)
+            .sized(0.98f, 0.98f)
+            .clientTrackingRange(10)
+            .build("locomotive_diesel_small"));
 }

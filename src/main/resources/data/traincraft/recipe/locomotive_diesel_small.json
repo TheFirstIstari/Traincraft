@@ -1,0 +1,18 @@
+{
+  "type": "traincraft:train_workbench",
+  "slots": [
+    {"item": "traincraft:steel_chimney"},
+    {"item": "traincraft:boiler_steel"},
+    {"item": "traincraft:steel_cabin"},
+    {"item": "traincraft:engine_diesel"},
+    {"item": "traincraft:transmission"},
+    {"item": "traincraft:controls"},
+    {"item": "traincraft:steel_bogie"},
+    {"item": "traincraft:steel_frame"},
+    {"item": "traincraft:steel_bogie"}
+  ],
+  "result": {
+    "id": "traincraft:locomotive_diesel_small_spawn_egg",
+    "count": 1
+  }
+}
